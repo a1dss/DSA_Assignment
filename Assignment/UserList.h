@@ -1,0 +1,41 @@
+#pragma once
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+const int MAX_SIZE = 100;
+typedef string Username;
+typedef string Password;
+
+class UserList
+{
+private:
+	struct User
+	{
+		Username name;
+		Password pword;
+		bool isAdmin;
+		User* next;
+	};
+
+	User* list[MAX_SIZE];
+	int size;
+
+public:
+	// constructor
+	UserList();
+
+	// destructor
+	~UserList();
+
+	// hash
+	int hash();
+
+	bool add(Username user, Password pword, bool isAdmin);
+
+	bool remove(Username user);
+
+
+
+};

@@ -34,8 +34,13 @@ public:
 
 	bool add(Username user, Password pword, bool isAdmin);
 
-	bool remove(Username user);
+	void remove(Username user);
 
+	Username get(Username);
 
+	bool isEmpty();
 
+	int getLength();
+
+	void print();
 };

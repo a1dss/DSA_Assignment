@@ -30,7 +30,7 @@ public:
 	~UserList();
 
 	// hash
-	int hash();
+	int hash(Username user);
 
 	bool add(Username user, Password pword, bool isAdmin);
 

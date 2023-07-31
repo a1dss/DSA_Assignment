@@ -22,6 +22,8 @@ private:
 	User* list[MAX_SIZE];
 	int size;
 
+	
+
 public:
 	// constructor
 	UserList();
@@ -30,11 +32,11 @@ public:
 	~UserList();
 
 	// hash
-	int hash(Username user);
+	int hash(Username user,bool isAdmin);
 
-	bool add(Username user, Password pword, bool isAdmin);
+	bool add(Username user, Password pword,bool isAdmin);
 
-	void remove(Username user);
+	void remove(Username user, bool isAdmin);
 
 	Username get(Username);
 
@@ -43,4 +45,6 @@ public:
 	int getLength();
 
 	void print();
+
+	bool Login(Username name, Password pword);
 };

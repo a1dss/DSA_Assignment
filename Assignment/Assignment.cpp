@@ -2,20 +2,62 @@
 //
 
 #include <iostream>
+#include <string>
+#include "FoodList.h"
+#include "OrderList.h"
+#include "UserList.h"
 
 using namespace std;
 int main()
 {
-    std::cout << "Hello World!\n";
+    // Init
+    UserList userList;
+    bool welcomeFlag = true;
+    while (welcomeFlag) {
+        cout << "Welcome\n"
+            << "[1] Log in to Existing Account\n"
+            << "[2] Register New Account\n"
+            << "[0] Exit\n"
+            << "Please Choose an Option";
+        int option;
+        cin >> option;
+
+        if (option == 1) {
+            string name;
+            string pword;
+            welcomeFlag = false;
+            cout << "Please Enter the Following:\n";
+            while (true) {
+
+                cout << "\nUsername: ";
+                cin >> name;
+                cout << "Password: ";
+                cin >> pword;
+
+                if (userList.Login(name, pword)) {
+                    cout << "Login Successful";
+                    break;
+                }
+                else {
+                    cout << "Login Failed\n"
+                         << "PLease try again";
+                }
+            }
+
+        }
+        else if (option == 2) {
+            welcomeFlag = false;
+        }
+        else if (option == 0) {
+            return 0;
+        }
+        else {
+            cout << "Invalid Input";
+        }
+    }
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+void printLogin() {
+    cout << "Welcome:";
+}
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

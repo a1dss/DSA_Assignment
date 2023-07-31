@@ -18,7 +18,7 @@ int main()
             << "[1] Log in to Existing Account\n"
             << "[2] Register New Account\n"
             << "[0] Exit\n"
-            << "Please Choose an Option";
+            << "Please Choose an Option: ";
         int option;
         cin >> option;
 
@@ -47,6 +47,10 @@ int main()
         }
         else if (option == 2) {
             welcomeFlag = false;
+            string newName;
+            string newPword;
+            cout << "Enter Username";
+
         }
         else if (option == 0) {
             return 0;
@@ -57,7 +61,4 @@ int main()
     }
 }
 
-void printLogin() {
-    cout << "Welcome:";
-}
 

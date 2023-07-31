@@ -38,7 +38,7 @@ public:
 
 	void remove(Username user, bool isAdmin);
 
-	Username get(Username);
+	
 
 	bool isEmpty();
 

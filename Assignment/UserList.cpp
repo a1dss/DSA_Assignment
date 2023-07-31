@@ -103,9 +103,8 @@ void UserList::remove(Username name,bool isAdmin) {
 	size--;
 }
 
-//Username UserList::get(Username name) {
-//
-//}
+
+
 
 bool UserList::isEmpty() {
 	return true;

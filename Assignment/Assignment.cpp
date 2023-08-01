@@ -6,13 +6,43 @@
 #include "FoodList.h"
 #include "OrderList.h"
 #include "UserList.h"
-
 using namespace std;
+
+int AdminPanel() 
+{
+    cout << "Welcome\n"
+        << "[1] See Orders\n"
+        << "[2] Add food item\n"
+        << "[3] See all food item\n"
+        << "[0] Logout\n"
+        << "Please Choose an Option: ";
+    int option;
+    cin >> option;
+    return option;
+}
+
+int UserPanel()
+{
+    cout << "Welcome\n"
+        << "[1] Make Orders\n"
+        << "[2] Browse food item\n"
+        << "[0] Logout\n"
+        << "Please Choose an Option: ";
+    int option;
+    cin >> option;
+    return option;
+}
+
+
+
 int main()
 {
     // Init
+    FoodList Food;
+    Food.InitList();
     UserList userList;
     bool welcomeFlag = true;
+
     while (welcomeFlag) {
         cout << "Welcome\n"
             << "[1] Log in to Existing Account\n"
@@ -50,6 +80,28 @@ int main()
             string newName;
             string newPword;
             cout << "Enter Username";
+
+        }
+        //Testing
+        else if (option == 3) {
+            while (true)
+            {
+                int choice = AdminPanel();
+                if (choice == 2)
+                {
+                    cout << "Food name: ";
+                    string food;
+                    cin >> food;
+                    Food.ShowCata();
+                    int cata;
+                    cin >> cata;
+                    Food.Add(food, 19, cata);
+                }
+                else if (choice == 3)
+                {
+                    Food.PrintAll();
+                }
+            }
 
         }
         else if (option == 0) {

@@ -105,6 +105,9 @@ void UserList::remove(Username name,bool isAdmin) {
 
 
 
+string UserList::get(Username user) {
+	return user;
+}
 
 bool UserList::isEmpty() {
 	return true;

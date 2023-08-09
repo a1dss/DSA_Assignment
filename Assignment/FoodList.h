@@ -4,10 +4,12 @@
 using namespace std;
 
 typedef string Name;
-typedef int Cost;
+typedef double Cost;
 typedef string Category;
+typedef int foodID;
+int const MAX_SIZEf = 1000;
 
-class Food
+class FoodList
 {
 
 
@@ -17,20 +19,22 @@ private:
 		Name name;
 		Cost cost;
 		Category catagory;
+		foodID id;
 	};
 
-	Food* FoodArr[1000];
+	FoodItem FoodArr[MAX_SIZEf];
 	int size;
+	string CataList[8] = {"Chinese","Western","Malay","Indian","Japanese","Korean","Thai","Others"};
 
 public:
 	//Initial List creation(Food)
 	void InitList();
 
 	//Add food to list
-	bool Add(string name, int cost, string catagory);
+	void Add(string name, double cost, int catagory);
 
 	//Remove food from list
-	bool Remove(string name);
+	bool Remove(int foodid);
 
 	//List all food option and prices
 	void PrintAll();
@@ -41,6 +45,7 @@ public:
 	//Search for food item and return the index
 	int Search(string name);
 
-
+	//Show all current categorys
+	void ShowCata();
 };
 

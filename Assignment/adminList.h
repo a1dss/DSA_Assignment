@@ -4,7 +4,7 @@
 #include "Admin.h"
 using namespace std;
 
-const int MAX_SIZE = 10;
+const int ADMIN_SIZE = 10;
 
 class adminList
 {
@@ -15,7 +15,7 @@ private:
 		AdminNode* next;
 	};
 
-	AdminNode* AdminList[MAX_SIZE];
+	AdminNode* AdminList[ADMIN_SIZE];
 	int adminSize;
 
 public:
@@ -38,5 +38,6 @@ public:
 	void print();
 
 	bool Login(Username name, Password pword);
+
 };
 

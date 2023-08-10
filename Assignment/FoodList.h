@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <format>
+#include <cctype>
 using namespace std;
 
 typedef string Name;
@@ -64,4 +65,6 @@ public:
 
 
 	void DefaultFood();
+
+	int ReturnCatNum(string category);
 };

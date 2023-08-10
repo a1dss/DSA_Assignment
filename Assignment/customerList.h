@@ -4,7 +4,7 @@
 #include "Customer.h"
 
 using namespace std;
-const int MAX_SIZE = 100;
+const int CUST_SIZE = 100;
 
 class customerList
 {
@@ -14,7 +14,7 @@ private:
 		CustNode* next;
 	};
 
-	CustNode* CustList[MAX_SIZE];
+	CustNode* CustList[CUST_SIZE];
 	int custSize;
 
 public:

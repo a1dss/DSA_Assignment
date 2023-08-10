@@ -5,34 +5,24 @@
 #include "Customer.h"
 #include "Admin.h"
 #include "FoodList.h"
+#include "adminList.h"
+#include "customerList.h"
 using namespace std;
 
 
-int AdminPanel()
+void AdminPanel()
 {
     cout << "Welcome\n"
         << "[1] See Order Details\n"
         << "[2] Add food item\n"
         << "[3] See all food item\n"
-        << "[5] Update Order status\n"
+        << "[4] Update Order status\n"
         << "[0] Logout\n"
         << "Please Choose an Option: ";
-    try
-    {
-        int option;
-        cin >> option;
-        throw option;
-    }
-    catch (int x)
-    {
-        return x;
-    }
-    catch (...)
-    {
-        return -1;
-    }
-
+   
 }
+
+
 
 string FoodViewPanel()
 {
@@ -83,12 +73,22 @@ string OrderPanel()
 int main()
 {
     FoodList FoodList;
+    customerList CustList;
+    adminList AdminList;
+    Admin admin1 = Admin("Admin1", "ThisIsAGoodPassword");
+    Admin admin2 = Admin("Admin2", "ThisIsAGreatPassword");
+    Admin admin3 = Admin("Admin3", "ThisIsAPassword");
+    AdminList.add(admin1);
+    AdminList.add(admin2);
+    AdminList.add(admin3);
     FoodList.InitList();
     FoodList.DefaultFood();
-    string name;
-    string pword;
-    bool islogin = false;
+    
     while (true) {
+        string name;
+        string pword;
+        bool islogin = false;
+        bool isadmin = true;
         cout << "Welcome\n"
             << "[1] Log in to Existing Account\n"
             << "[2] Register New Account\n"
@@ -96,33 +96,38 @@ int main()
             << "Please Choose an Option: ";
         string option;
         cin >> option;
-
+        
         if (option == "1") {
 
             cout << "Please Enter the Following:\n";
             while (true) {
-
+                
                 cout << "\nUsername: ";
                 cin >> name;
                 cout << "Password: ";
                 cin >> pword;
-                islogin = true;
-                break;
-                //if (userList.Login(name, pword)) {
-                //    cout << "Login Successful";
-                //    break;
-                //}
-                //else {
-                //    cout << "Login Failed\n"
-                //        << "PLease try again";
-                //}
+                islogin = AdminList.Login(name, pword);
+                if (!islogin) {
+                    islogin = CustList.Login(name, pword);
+                    isadmin = false;
+                }
+
+                if (islogin) {
+                    break;
+                }
             }
 
         }
-        else if (option == "2") {
+        else if (option == "2") { //For register, assume only Customers can register via the page. 
             string newName;
             string newPword;
-            cout << "Enter Username";
+            cout << "Enter Username: ";
+            cin >> newName;
+            cout << "Enter Password: ";
+            cin >> newPword;
+            Customer newCust =  Customer(newName, newPword);
+            CustList.add(newCust);
+
 
         }
         else if (option == "0") {
@@ -132,8 +137,49 @@ int main()
         else {
             cout << "Invalid Input\n";
         }
+        while (islogin && isadmin) {
+            int option;
+            AdminPanel();
+            cin >> option;
+            
+            if (option == 1) { //See Order Details
 
-        while (islogin)
+            }
+
+            else if (option == 2) { //Add Food Item
+                string newFName;
+                double newFCost;
+                string newFCat;
+                cout << "Enter New Food Name: ";
+                cin.ignore();
+                getline(cin, newFName);
+                cout << "Enter New Food Cost: ";
+                cin >> newFCost;
+                cout << "Enter New Food Category: ";
+                cin >> newFCat;
+                int newFId = FoodList.ReturnCatNum(newFCat);
+                FoodList.Add(newFName, newFCost, newFId);
+            }
+
+            else if (option == 3) { //See All Food Item
+                FoodList.PrintAll();
+            }
+
+            else if (option == 4) { // Update Order Status
+
+            }
+
+            else if (option == 0) { // Log out
+                islogin = false;
+                isadmin = true;
+            }
+            else {
+                cout << "Invalid Input" << endl;
+            }
+            
+
+        }
+        while (islogin && !isadmin)
         {
             string choice = UserPanel();
             if (choice == "0")

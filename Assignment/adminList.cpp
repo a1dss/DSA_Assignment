@@ -1,14 +1,14 @@
 #include "adminList.h"
 
 adminList::adminList() {
-	for (int i = 0;i < MAX_SIZE;i++) {
+	for (int i = 0;i < ADMIN_SIZE;i++) {
 		AdminList[i] = nullptr;
 	}
 	adminSize = 0;
 }
 
 adminList::~adminList() {
-	for (int i = 0; i < MAX_SIZE; i++) {
+	for (int i = 0; i < ADMIN_SIZE; i++) {
 		delete AdminList[i];
 		AdminList[i] = nullptr;
 	}
@@ -16,7 +16,7 @@ adminList::~adminList() {
 }
 
 int adminList::hash(int len) {
-	return len % MAX_SIZE;
+	return len % ADMIN_SIZE;
 }
 
 bool adminList::add(Admin admin) {
@@ -108,7 +108,7 @@ int adminList::getLength() {
 	return adminSize;
 }
 void adminList::print() {
-	for (int i = 0; i < MAX_SIZE; i++) {
+	for (int i = 0; i < ADMIN_SIZE; i++) {
 		AdminNode* current = AdminList[i];
 
 
@@ -118,3 +118,17 @@ void adminList::print() {
 		}
 	}
 }
+bool adminList::Login(Username username, Password pwrod) {
+	int index = hash(username.length());
+	
+	AdminNode* current = AdminList[index];
+	while (current != nullptr) {
+		if (current->admin.getUsername() == username && current->admin.getPassword() == pwrod) {
+			return true;
+		}
+	}
+	
+	
+	return false;
+}
+

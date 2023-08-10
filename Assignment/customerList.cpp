@@ -1,14 +1,14 @@
 #include "customerList.h"
 
 customerList::customerList() {
-	for (int i = 0; i < MAX_SIZE;i++) {
+	for (int i = 0; i < CUST_SIZE;i++) {
 		CustList[i] = nullptr;
 	}
 	custSize = 0;
 }
 
 customerList:: ~customerList() {
-	for (int i = 0; i < MAX_SIZE;i++) {
+	for (int i = 0; i < CUST_SIZE;i++) {
 		delete CustList[i];
 		CustList[i] = nullptr;
 	}
@@ -16,7 +16,7 @@ customerList:: ~customerList() {
 }
 
 int customerList::hash(int len) {
-	return len % MAX_SIZE;
+	return len % CUST_SIZE;
 }
 
 bool customerList::add(Customer cust) {
@@ -107,7 +107,7 @@ int customerList::getLength() {
 }
 
 void customerList::print() {
-	for (int i = 0; i < MAX_SIZE; i++) {
+	for (int i = 0; i < CUST_SIZE; i++) {
 		CustNode* current = CustList[i];
 
 		while (current != nullptr) {
@@ -115,4 +115,17 @@ void customerList::print() {
 			current = current->next;
 		}
 	}
+}
+
+bool customerList::Login(Username username, Password pwrod) {
+	int index = hash(username.length());
+	
+	CustNode* current = CustList[index];
+	while (current != nullptr) {
+		if (current->cust.getUsername() == username && current->cust.getPassword() == pwrod) {
+			return true;
+		}
+	}
+	cout << "Invalid Username or Password" << endl;
+	return false;
 }

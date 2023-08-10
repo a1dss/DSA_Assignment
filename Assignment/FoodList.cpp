@@ -100,3 +100,16 @@ void FoodList::DefaultFood()
 	Add("Fried Chicken", 1.9, 2);
 	Add("Watermelon", 8.88, 8);
 }
+
+int FoodList::ReturnCatNum(string category) {
+	string array[]{ "Chinese","Western","Malay","Indian","Japanese","Korean","Thai","Others" };
+	int count = 0;
+	while (array[count] != category) {
+		count += 1;
+		if (count > 7) {
+			return -1;
+		}
+	}
+	return count + 1;
+	
+}

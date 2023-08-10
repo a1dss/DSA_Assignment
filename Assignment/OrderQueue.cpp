@@ -16,7 +16,7 @@ bool OrderQueue::isEmpty()
 }
 
 
-bool OrderQueue::Enqueue(string cust, ItemList items)
+bool OrderQueue::enqueue(string cust, ItemList items)
 {
 	if (items.firstNode == NULL)
 	{

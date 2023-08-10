@@ -38,28 +38,28 @@ public:
 
 	//Queue order
 	//Prequisite: Item List must not be empty
-	bool Enqueue(string cust, OrderItems items);
+	bool enqueue(string cust, OrderItems items);
 
 	//Remove first item of queue
-	void Dequeue();
+	void dequeue();
 
 	//Update status
-	void UpdateStatus(int pos);
+	void updateStatus(int pos);
 
 	//Get status of order
-	string GetStatus(int pos);
+	string getStatus(int pos);
 
 	//List all current orders
-	void ListOrders();
+	void listOrders();
 
 	//List all orders of current user
-	void ListOrders(string user);
+	void listOrders(string user);
 
 	//Remove a order only if status is preparing
-	bool Remove(string user, int pos);
+	bool remove(string user, int pos);
 
 	//Get Total of current order
-	double CalcTotal();
+	double calcTotal();
 
 };
 

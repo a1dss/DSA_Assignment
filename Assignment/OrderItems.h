@@ -20,6 +20,9 @@ public:
 	//constructor
 	OrderItems();
 
+	//deconstructor
+	//~OrderItems();
+
 
 	//Check if empty
 	bool IsEmpty();

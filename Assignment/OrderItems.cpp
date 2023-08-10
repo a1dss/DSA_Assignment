@@ -19,7 +19,7 @@ bool OrderItems::IsEmpty()
 
 bool OrderItems::AddtoList(int id, int qty, FoodList foodlist)
 {
-	if (foodlist.size>id or id<=0)
+	if (foodlist.size<id or id<=0)
 	{
 		cout << "Invalid Input";
 		return false;
@@ -45,4 +45,17 @@ bool OrderItems::AddtoList(int id, int qty, FoodList foodlist)
 		currnode->next = item;
 		return true;
 	}
+}
+
+void OrderItems::PrintAll(FoodList foodlist)
+{
+	cout << "Current items: " << endl;
+	Item* currnode = firstNode;
+	while (currnode != NULL)
+	{
+		cout << currnode->Qty << "\t" << foodlist.FoodArr[currnode->ID - 1].name << endl;
+		currnode = currnode->next;
+	}
+
+
 }

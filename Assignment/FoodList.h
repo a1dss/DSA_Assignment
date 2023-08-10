@@ -27,12 +27,13 @@ private:
 	};
 
 
-	FoodItem FoodArr[MAX_SIZEf];
+
 	string const CataList[cate_count] = { "Chinese","Western","Malay","Indian","Japanese","Korean","Thai","Others" };
 	bool Filters[cate_count] = { false,false,false,false,false,false,false,false };
 
 public:
 	int size;
+	FoodItem FoodArr[MAX_SIZEf];
 
 
 	//Initial List creation(Food)

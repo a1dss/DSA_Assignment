@@ -4,7 +4,7 @@
 #include "OrderItems.h"
 
 using namespace std;
-typedef string User;
+typedef string Orderer;
 typedef int OrderID;
 typedef string Status;
 typedef OrderItems ItemList;
@@ -13,7 +13,7 @@ class OrderQueue
 {
 	struct Order
 	{
-		User user;
+		Orderer user;
 		Status status;
 		ItemList itemList;
 		Order* next;
@@ -31,7 +31,7 @@ public:
 	OrderQueue();
 
 	//deconstructor
-	~OrderQueue();
+	//~OrderQueue();
 
 	//Check if queue is empty
 	bool isEmpty();

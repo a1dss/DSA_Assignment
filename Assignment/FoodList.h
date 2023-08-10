@@ -10,8 +10,7 @@ typedef int CategoryID;
 typedef int foodID;
 int const MAX_SIZEf = 1000;
 int const cate_count = 8;
-string const CataList[cate_count] = { "Chinese","Western","Malay","Indian","Japanese","Korean","Thai","Others" };
-bool Filters[cate_count] = { false,false,false,false,false,false,false,false };
+
 
 class FoodList
 {
@@ -28,7 +27,9 @@ private:
 	};
 
 	FoodItem FoodArr[MAX_SIZEf];
-	int size;
+	int size; 
+	string const CataList[cate_count] = { "Chinese","Western","Malay","Indian","Japanese","Korean","Thai","Others" };
+	bool Filters[cate_count] = { false,false,false,false,false,false,false,false };
 
 public:
 

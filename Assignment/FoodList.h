@@ -1,13 +1,17 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <format>
 using namespace std;
 
 typedef string Name;
 typedef double Cost;
-typedef string Category;
+typedef int CategoryID;
 typedef int foodID;
 int const MAX_SIZEf = 1000;
+int const cate_count = 8;
+string const CataList[cate_count] = { "Chinese","Western","Malay","Indian","Japanese","Korean","Thai","Others" };
+bool Filters[cate_count] = { false,false,false,false,false,false,false,false };
 
 class FoodList
 {
@@ -18,15 +22,17 @@ private:
 	{
 		Name name;
 		Cost cost;
-		Category catagory;
+		CategoryID catagory;
 		foodID id;
+
 	};
 
 	FoodItem FoodArr[MAX_SIZEf];
 	int size;
-	string CataList[8] = {"Chinese","Western","Malay","Indian","Japanese","Korean","Thai","Others"};
 
 public:
+
+
 	//Initial List creation(Food)
 	void InitList();
 
@@ -39,13 +45,21 @@ public:
 	//List all food option and prices
 	void PrintAll();
 
-	//Print food options filtered by catagory
-	void PrintByCata(string catagory);
+	//List all food filtered by categories
+	void PrintByCata();
 
-	//Search for food item and return the index
-	int Search(string name);
+	//Reset Filters
+	void  ResetFilter();
+
+	//Add filters
+	void AddFilter(int index);
+
+	//Print food options filtered by catagory
+	void GetFilters();
 
 	//Show all current categorys
 	void ShowCata();
-};
 
+
+	void DefaultFood();
+};

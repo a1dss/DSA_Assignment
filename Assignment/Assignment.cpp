@@ -7,6 +7,9 @@
 #include "FoodList.h"
 #include "adminList.h"
 #include "customerList.h"
+#include "OrderItems.h"
+#include "OrderQueue.h"
+
 using namespace std;
 
 
@@ -75,6 +78,7 @@ int main()
     FoodList FoodList;
     customerList CustList;
     adminList AdminList;
+    OrderQueue orderqueue;
     Admin admin1 = Admin("Admin1", "ThisIsAGoodPassword");
     Admin admin2 = Admin("Admin2", "ThisIsAGreatPassword");
     Admin admin3 = Admin("Admin3", "ThisIsAPassword");
@@ -206,8 +210,8 @@ int main()
                         cout << "Input Quantity:";
                         int qty;
                         cin >> qty;
-                        items.AddtoList(foodno, qty, foodList);
-                        items.PrintAll(foodList);
+                        items.AddtoList(foodno, qty, FoodList);
+                        items.PrintAll(FoodList);
 
                     }
                     else if (orderchoice == "2")
@@ -222,19 +226,19 @@ int main()
                             }
                             else if (option == "1")
                             {
-                                foodList.PrintAll();
+                                FoodList.PrintAll();
                             }
                             else if (option == "2")
                             {
-                                foodList.ResetFilter();
+                                FoodList.ResetFilter();
                                 bool filtering = true;
                                 while (filtering)
                                 {
-                                    foodList.ShowCata();
+                                    FoodList.ShowCata();
                                     cout << "Input catagory number: ";
                                     int catanum;
                                     cin >> catanum;
-                                    foodList.AddFilter(catanum);
+                                    FoodList.AddFilter(catanum);
                                     while (true)
                                     {
                                         cout << "Add more filters [Y/N]: ";
@@ -254,10 +258,10 @@ int main()
                                             cout << "Invalid input";
                                         }
                                     }
-                                    foodList.GetFilters();
+                                    FoodList.GetFilters();
 
                                 }
-                                foodList.PrintByCata();
+                                FoodList.PrintByCata();
                             }
                         }
                     }
@@ -269,13 +273,13 @@ int main()
                         }
                         else
                         {
-                            items.PrintAll(foodList);
+                            items.PrintAll(FoodList);
                             cout << "Confirm order [Y/N]:";
                             string confirm;
                             cin >> confirm;
                             if (confirm == "Y")
                             {
-                                orderqueue.Enqueue(name, items);
+                                orderqueue.enqueue(name, items);
                                 cout << "Order successful";
                                 ordering = false;
 

@@ -41,7 +41,7 @@ public:
 	bool enqueue(string cust, OrderItems items);
 
 	//Remove first item of queue
-	void dequeue();
+	bool dequeue();
 
 	//Update status
 	void updateStatus(int pos);

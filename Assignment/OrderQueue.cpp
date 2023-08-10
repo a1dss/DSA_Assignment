@@ -44,3 +44,21 @@ bool OrderQueue::enqueue(string cust, ItemList items)
 		return true;
 	}
 }
+
+bool OrderQueue::dequeue() {
+	if (isEmpty()) {
+		return false;
+	}
+	if (firstNode == lastNode) {
+		delete firstNode;
+		firstNode = NULL;
+		lastNode = NULL;
+	}
+	else {
+		Order* temp = new Order;
+		temp = firstNode;
+		firstNode = firstNode->next;
+		delete temp;
+	}
+	return true;
+}

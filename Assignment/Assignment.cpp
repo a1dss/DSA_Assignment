@@ -151,7 +151,7 @@ int main()
                 double newFCost;
                 string newFCat;
                 cout << "Enter New Food Name: ";
-                cin.ignore();
+                cin.ignore();             //Reads entire line, including spaces
                 getline(cin, newFName);
                 cout << "Enter New Food Cost: ";
                 cin >> newFCost;

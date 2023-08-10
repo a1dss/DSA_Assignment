@@ -33,4 +33,7 @@ public:
 
 	//Calculate total price
 	double CalculateTotal(FoodList foodlist);
+
+	//Show current items
+	void PrintAll(FoodList foodlist);
 };

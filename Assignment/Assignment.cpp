@@ -189,8 +189,10 @@ int main()
             else if (choice == "1")
             {
                 bool ordering = true;
+                OrderItems items;
                 while (ordering)
                 {
+                    cout << items.IsEmpty();
                     string orderchoice = OrderPanel();
                     if (orderchoice == "0")
                     {
@@ -198,6 +200,14 @@ int main()
                     }
                     else if (orderchoice == "1")
                     {
+                        cout << "Input Food ID:";
+                        int foodno;
+                        cin >> foodno;
+                        cout << "Input Quantity:";
+                        int qty;
+                        cin >> qty;
+                        items.AddtoList(foodno, qty, foodList);
+                        items.PrintAll(foodList);
 
                     }
                     else if (orderchoice == "2")
@@ -212,19 +222,19 @@ int main()
                             }
                             else if (option == "1")
                             {
-                                FoodList.PrintAll();
+                                foodList.PrintAll();
                             }
                             else if (option == "2")
                             {
-                                FoodList.ResetFilter();
+                                foodList.ResetFilter();
                                 bool filtering = true;
                                 while (filtering)
                                 {
-                                    FoodList.ShowCata();
+                                    foodList.ShowCata();
                                     cout << "Input catagory number: ";
                                     int catanum;
                                     cin >> catanum;
-                                    FoodList.AddFilter(catanum);
+                                    foodList.AddFilter(catanum);
                                     while (true)
                                     {
                                         cout << "Add more filters [Y/N]: ";
@@ -244,13 +254,45 @@ int main()
                                             cout << "Invalid input";
                                         }
                                     }
-                                    FoodList.GetFilters();
+                                    foodList.GetFilters();
 
                                 }
-                                FoodList.PrintByCata();
+                                foodList.PrintByCata();
                             }
                         }
                     }
+                    else if (orderchoice == "3")
+                    {
+                        if (items.IsEmpty())
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            items.PrintAll(foodList);
+                            cout << "Confirm order [Y/N]:";
+                            string confirm;
+                            cin >> confirm;
+                            if (confirm == "Y")
+                            {
+                                orderqueue.Enqueue(name, items);
+                                cout << "Order successful";
+                                ordering = false;
+
+                            }
+                            else if (confirm == "N")
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                cout << "Invalid Input" << endl;
+                            }
+                        }
+
+                    }
+
+
                 }
 
             }

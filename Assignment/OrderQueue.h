@@ -43,8 +43,8 @@ public:
 	//Remove first item of queue
 	bool dequeue();
 
-	//Update status
-	void updateStatus(int pos, string status);
+	//Update status of first Node
+	void updateStatus( string status);
 
 	//Get status of order
 	string getStatus(int pos);
@@ -58,8 +58,7 @@ public:
 	//Change status to cancel if status is preparing and is the surrent user's order
 	void cancelOrder(string user, int pos);
 
-	//Get Total of current order
-	double calcTotal();
+
 
 };
 

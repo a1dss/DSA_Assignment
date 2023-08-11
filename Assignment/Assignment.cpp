@@ -31,8 +31,7 @@ string FoodViewPanel()
 
     cout << "[1] Show all food\n"
         << "[2] Filter By Categories\n"
-        << "[3] Filter By Restaurants\n"
-        << "[4] Filter By Price\n"
+        << "[3] Filter By Price\n"
         << "[0] Return\n"
         << "Please Choose an Option: ";
 
@@ -174,7 +173,22 @@ int main()
             }
 
             else if (option == 4) { // Update Order Status
+                cout << "Change status of first order to completed [Y/N]:";
+                string confirm;
+                cin >> confirm;
+                if (confirm == "Y")
+                {
+                    orderqueue.updateStatus("Completed");
 
+                }
+                else if (confirm == "N")
+                {
+                    continue;
+                }
+                else
+                {
+                    cout << "Invalid Input" << endl;
+                }
             }
 
             else if (option == 0) { // Log out

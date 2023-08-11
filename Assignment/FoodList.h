@@ -43,8 +43,6 @@ public:
 	//Add food to list
 	void Add(string name, double cost, int catagory);
 
-	//Remove food from list
-	bool Remove(int foodid);
 
 	//List all food option and prices
 	void PrintAll();

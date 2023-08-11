@@ -59,3 +59,15 @@ void OrderItems::PrintAll(FoodList foodlist)
 
 
 }
+
+
+double OrderItems::CalculateTotal(FoodList foodlist)
+{
+	double currtotal = 0;
+	Item* currnode = firstNode;
+	while (currnode != NULL)
+	{
+		currtotal += foodlist.FoodArr[currnode->ID].cost * currnode->Qty;
+	}
+	return currtotal;
+}

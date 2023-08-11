@@ -58,3 +58,79 @@ bool OrderQueue::dequeue() {
 	}
 	return true;
 }
+
+string OrderQueue::getStatus(int pos)
+{
+	Order* currnode = firstNode;
+	for (int i = 0; i < pos; i++)
+	{
+		currnode = currnode->next;
+	}
+	return currnode->status;
+}
+
+
+void OrderQueue::updateStatus(int pos, string status)
+{
+	Order* currnode = firstNode;
+	for (int i = 0; i < pos; i++)
+	{
+		currnode = currnode->next;
+	}
+	currnode->status = status;
+}
+
+void OrderQueue::cancelOrder(string user, int pos)
+{
+	Order* currnode = firstNode;
+	for (int i = 0; i < pos; i++)
+	{
+		currnode = currnode->next;
+	}
+	if (currnode->user != user && currnode->status != "Preparing")
+	{
+		cout << "Invalid Order" << endl;
+		return;
+	}
+	else
+	{
+		currnode->status = "Cancelled";
+	}
+}
+
+//<<<<<<< Updated upstream
+void OrderQueue::listOrders(FoodList foodList) {
+	if (isEmpty()) {
+		return;
+	}
+	Order* temp = new Order;
+	temp = firstNode;
+	int i = 1;
+	while (temp != nullptr) {
+		cout << i << ")   " << "User: " << temp->user << "\tStatus: " << temp->status << "\nOrdered Items: \n";
+		temp->itemList.PrintAll(foodList);
+		temp = temp->next;
+		i++;
+	}
+}
+//>>>>>>> Stashed changes
+
+void OrderQueue::listOrders(string user, FoodList foodList)
+{
+	if (isEmpty()) {
+		return;
+	}
+	Order* temp = new Order;
+	temp = firstNode;
+	int i = 1;
+	while (temp != nullptr) {
+		if (temp->user == user)
+		{
+			cout << i << ")   " << "User: " << "User: " << temp->user << "\tStatus: " << temp->status << "\nOrdered Items: \n";
+			temp->itemList.PrintAll(foodList);
+		}
+
+		temp = temp->next;
+		i++;
+	}
+}

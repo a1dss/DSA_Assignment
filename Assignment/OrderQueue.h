@@ -44,7 +44,7 @@ public:
 	bool dequeue();
 
 	//Update status
-	void updateStatus(int pos);
+	void updateStatus(int pos, string status);
 
 	//Get status of order
 	string getStatus(int pos);
@@ -53,10 +53,10 @@ public:
 	void listOrders(FoodList foodList);
 
 	//List all orders of current user
-	void listOrders(string user);
+	void listOrders(string user, FoodList foodlist);
 
 	//Change status to cancel if status is preparing and is the surrent user's order
-	bool updateStatus(string user, int pos);
+	void cancelOrder(string user, int pos);
 
 	//Get Total of current order
 	double calcTotal();

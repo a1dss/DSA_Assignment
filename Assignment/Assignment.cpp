@@ -305,6 +305,7 @@ int main()
             else if (choice == "2")
             {
 
+                orderqueue.listOrders(name, FoodList);
 
             }
             else

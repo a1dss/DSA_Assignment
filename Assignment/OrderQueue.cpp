@@ -28,6 +28,7 @@ bool OrderQueue::enqueue(string cust, ItemList items)
 
 	if (isEmpty() == true)
 	{
+		order->status = "Preparing";
 		firstNode = order;
 		lastNode = order;
 		return true;

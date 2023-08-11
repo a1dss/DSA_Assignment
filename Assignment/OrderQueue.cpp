@@ -89,11 +89,11 @@ void OrderQueue::updateStatus(int pos, string status)
 void OrderQueue::cancelOrder(string user, int pos)
 {
 	Order* currnode = firstNode;
-	for (int i = 0; i < pos; i++)
+	for (int i = 0; i <= pos; i++)
 	{
 		currnode = currnode->next;
 	}
-	if (currnode->user != user && currnode->status != "Preparing")
+	if (currnode->user != user || currnode->status == "Preparing")
 	{
 		cout << "Invalid Order" << endl;
 		return;

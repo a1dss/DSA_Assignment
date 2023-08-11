@@ -67,7 +67,8 @@ double OrderItems::CalculateTotal(FoodList foodlist)
 	Item* currnode = firstNode;
 	while (currnode != NULL)
 	{
-		currtotal += foodlist.FoodArr[currnode->ID].cost * currnode->Qty;
+		currtotal += foodlist.FoodArr[currnode->ID-1].cost * currnode->Qty;
+		currnode = currnode->next;
 	}
 	return currtotal;
 }

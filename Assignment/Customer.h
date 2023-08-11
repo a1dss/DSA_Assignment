@@ -2,13 +2,25 @@
 #include <iostream>
 #include <string>
 #include "User.h"
+
+typedef int Points;
+typedef string Rank;
+
+const int DEFAULT_POINTS = 0;
+const string DEFAULT_RANK = "Bronze";
+
 using namespace std;
 class Customer : public User
 {
 private:
-
+	Points points;
+	Rank rank;
 public:
 	Customer();
-	Customer(Username, Password);
+	Customer(Username, Password,Points,Rank);
+	void DisplayInfo();
+	void UpdateRank();
+	void AddPoints(Points amountAdded);
+	bool UsePoints(Points points);
 };
 

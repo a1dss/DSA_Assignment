@@ -129,7 +129,7 @@ int main()
             cin >> newName;
             cout << "Enter Password: ";
             cin >> newPword;
-            Customer newCust =  Customer(newName, newPword);
+            Customer newCust =  Customer(newName, newPword,DEFAULT_POINTS,DEFAULT_RANK);
             CustList.add(newCust);
 
 

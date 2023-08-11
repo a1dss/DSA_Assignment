@@ -196,7 +196,7 @@ int main()
                 OrderItems items;
                 while (ordering)
                 {
-                    cout << items.IsEmpty();
+
                     string orderchoice = OrderPanel();
                     if (orderchoice == "0")
                     {
@@ -210,6 +210,7 @@ int main()
                         cout << "Input Quantity:";
                         int qty;
                         cin >> qty;
+
                         items.AddtoList(foodno, qty, FoodList);
                         items.PrintAll(FoodList);
 
@@ -306,6 +307,7 @@ int main()
             {
 
                 orderqueue.listOrders(name, FoodList);
+
 
             }
             else

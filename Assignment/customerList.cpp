@@ -38,7 +38,7 @@ bool customerList::add(Customer cust) {
 			return false;
 		}
 		while (current->next != nullptr) {
-			if (current->cust.getPassword() == cust.getUsername()) {
+			if (current->cust.getUsername() == cust.getUsername()) {
 				delete newCust;
 				cout << "Existing Username" << endl;
 				return false;
@@ -125,6 +125,7 @@ bool customerList::Login(Username username, Password pwrod) {
 		if (current->cust.getUsername() == username && current->cust.getPassword() == pwrod) {
 			return true;
 		}
+		current = current->next;
 	}
 	cout << "Invalid Username or Password" << endl;
 	return false;

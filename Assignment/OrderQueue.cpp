@@ -62,3 +62,16 @@ bool OrderQueue::dequeue() {
 	}
 	return true;
 }
+
+void OrderQueue::listOrders(FoodList foodList) {
+	if (isEmpty()) {
+		return;
+	}
+	Order* temp = new Order;
+	temp = firstNode;
+	while (temp != nullptr) {
+		cout << "User: " << temp->user << "\tStatus: " << temp->status << "\nOrdered Items: \n";
+		temp->itemList.PrintAll(foodList);
+		temp = temp->next;
+	}
+}

@@ -126,6 +126,7 @@ bool adminList::Login(Username username, Password pwrod) {
 		if (current->admin.getUsername() == username && current->admin.getPassword() == pwrod) {
 			return true;
 		}
+		current = current->next;
 	}
 	
 	

@@ -147,7 +147,7 @@ int main()
             cin >> option;
             
             if (option == 1) { //See Order Details
-
+                orderqueue.listOrders(FoodList);
             }
 
             else if (option == 2) { //Add Food Item

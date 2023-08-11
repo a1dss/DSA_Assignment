@@ -50,7 +50,7 @@ public:
 	string getStatus(int pos);
 
 	//List all current orders
-	void listOrders();
+	void listOrders(FoodList foodList);
 
 	//List all orders of current user
 	void listOrders(string user);

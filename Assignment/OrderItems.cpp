@@ -20,7 +20,7 @@ bool OrderItems::IsEmpty()
 bool OrderItems::AddtoList(int id, int qty, FoodList foodlist)
 {
 	bool exists = false;
-	if (foodlist.size<id or id<=0)
+	if (foodlist.size<id or id<=0 or qty <=0)
 	{
 		cout << "Invalid Input\n";
 		return false;

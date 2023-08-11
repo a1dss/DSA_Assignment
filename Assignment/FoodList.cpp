@@ -102,11 +102,13 @@ void FoodList::DefaultFood()
 }
 
 int FoodList::ReturnCatNum(string category) {
-	string array[]{ "Chinese","Western","Malay","Indian","Japanese","Korean","Thai","Others" };
+
+
 	int count = 0;
-	while (array[count] != category) {
+	while (CataList[count] != category) {
 		count += 1;
-		if (count > 7) {
+		if (count >cate_count) 
+		{
 			return -1;
 		}
 	}

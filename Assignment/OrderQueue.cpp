@@ -22,12 +22,13 @@ bool OrderQueue::enqueue(string cust, ItemList items)
 	Order* order = new Order;
 	order->user = cust;
 	order->itemList = items;
-	order->status = "Preparing";
+	order->status = "In Queue";
 	order->next = NULL;
 
 
 	if (isEmpty() == true)
 	{
+		order->status = "Preparing";
 		firstNode = order;
 		lastNode = order;
 		return true;
@@ -54,6 +55,11 @@ bool OrderQueue::dequeue() {
 		Order* temp = new Order;
 		temp = firstNode;
 		firstNode = firstNode->next;
+		while (firstNode->status == "Cancelled")
+		{
+			firstNode = firstNode->next;
+		}
+		firstNode->status = "Preparing";
 		delete temp;
 	}
 	return true;
@@ -83,11 +89,11 @@ void OrderQueue::updateStatus(int pos, string status)
 void OrderQueue::cancelOrder(string user, int pos)
 {
 	Order* currnode = firstNode;
-	for (int i = 0; i < pos; i++)
+	for (int i = 0; i <= pos; i++)
 	{
 		currnode = currnode->next;
 	}
-	if (currnode->user != user && currnode->status != "Preparing")
+	if (currnode->user != user || currnode->status == "Preparing")
 	{
 		cout << "Invalid Order" << endl;
 		return;
@@ -134,3 +140,5 @@ void OrderQueue::listOrders(string user, FoodList foodList)
 		i++;
 	}
 }
+
+

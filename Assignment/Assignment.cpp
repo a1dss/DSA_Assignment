@@ -9,7 +9,6 @@
 #include "customerList.h"
 #include "OrderItems.h"
 #include "OrderQueue.h"
-
 using namespace std;
 
 
@@ -75,7 +74,7 @@ string OrderPanel()
 
 int main()
 {
-    FoodList FoodList;
+    FoodList foodList;
     customerList CustList;
     adminList AdminList;
     OrderQueue orderqueue;
@@ -85,8 +84,8 @@ int main()
     AdminList.add(admin1);
     AdminList.add(admin2);
     AdminList.add(admin3);
-    FoodList.InitList();
-    FoodList.DefaultFood();
+    foodList.InitList();
+    foodList.DefaultFood();
     
     while (true) {
         string name;
@@ -152,7 +151,7 @@ int main()
             cin >> option;
             
             if (option == 1) { //See Order Details
-                orderqueue.listOrders(FoodList);
+                orderqueue.listOrders(foodList);
             }
 
             else if (option == 2) { //Add Food Item
@@ -166,12 +165,12 @@ int main()
                 cin >> newFCost;
                 cout << "Enter New Food Category: ";
                 cin >> newFCat;
-                int newFId = FoodList.ReturnCatNum(newFCat);
-                FoodList.Add(newFName, newFCost, newFId);
+                int newFId = foodList.ReturnCatNum(newFCat);
+                foodList.Add(newFName, newFCost, newFId);
             }
 
             else if (option == 3) { //See All Food Item
-                FoodList.PrintAll();
+                foodList.PrintAll();
             }
 
             else if (option == 4) { // Update Order Status
@@ -201,7 +200,7 @@ int main()
                 OrderItems items;
                 while (ordering)
                 {
-                    cout << items.IsEmpty();
+
                     string orderchoice = OrderPanel();
                     if (orderchoice == "0")
                     {
@@ -215,8 +214,9 @@ int main()
                         cout << "Input Quantity:";
                         int qty;
                         cin >> qty;
-                        items.AddtoList(foodno, qty, FoodList);
-                        items.PrintAll(FoodList);
+
+                        items.AddtoList(foodno, qty, foodList);
+                        items.PrintAll(foodList);
 
                     }
                     else if (orderchoice == "2")
@@ -231,19 +231,19 @@ int main()
                             }
                             else if (option == "1")
                             {
-                                FoodList.PrintAll();
+                                foodList.PrintAll();
                             }
                             else if (option == "2")
                             {
-                                FoodList.ResetFilter();
+                                foodList.ResetFilter();
                                 bool filtering = true;
                                 while (filtering)
                                 {
-                                    FoodList.ShowCata();
+                                    foodList.ShowCata();
                                     cout << "Input catagory number: ";
                                     int catanum;
                                     cin >> catanum;
-                                    FoodList.AddFilter(catanum);
+                                    foodList.AddFilter(catanum);
                                     while (true)
                                     {
                                         cout << "Add more filters [Y/N]: ";
@@ -263,10 +263,10 @@ int main()
                                             cout << "Invalid input";
                                         }
                                     }
-                                    FoodList.GetFilters();
+                                    foodList.GetFilters();
 
                                 }
-                                FoodList.PrintByCata();
+                                foodList.PrintByCata();
                             }
                         }
                     }
@@ -320,8 +320,26 @@ int main()
             }
             else if (choice == "2")
             {
-
-                orderqueue.listOrders(name, FoodList);
+     
+                char cancel;
+                orderqueue.listOrders(name, foodList);
+                cout << "Cancel Order[Y/N]: ";
+                cin >> cancel;
+                if (towupper(cancel) == 'Y')
+                {
+                    cout << "Input Order Number: ";
+                    int ornum;
+                    cin >> ornum;
+                    orderqueue.cancelOrder(name, ornum);
+                }
+                else if (towupper(cancel) == 'N')
+                {
+                    continue;
+                }
+                else
+                {
+                    cout << "Invalid input\n";
+                }
 
             }
             else if (choice == "3") {
@@ -330,7 +348,7 @@ int main()
            
             else
             {
-                cout << choice << endl;
+                cout << "Invalid Input" << endl;
             }
 
 

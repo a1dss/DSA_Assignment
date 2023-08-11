@@ -55,8 +55,8 @@ public:
 	//List all orders of current user
 	void listOrders(string user);
 
-	//Remove a order only if status is preparing
-	bool remove(string user, int pos);
+	//Change status to cancel if status is preparing and is the surrent user's order
+	bool updateStatus(string user, int pos);
 
 	//Get Total of current order
 	double calcTotal();

@@ -18,11 +18,7 @@ bool OrderQueue::isEmpty()
 
 bool OrderQueue::enqueue(string cust, ItemList items)
 {
-	if (items.firstNode == NULL)
-	{
-		cout << "Your order is empty";
-		return false;
-	}
+
 	Order* order = new Order;
 	order->user = cust;
 	order->itemList = items;
@@ -61,17 +57,4 @@ bool OrderQueue::dequeue() {
 		delete temp;
 	}
 	return true;
-}
-
-void OrderQueue::listOrders(FoodList foodList) {
-	if (isEmpty()) {
-		return;
-	}
-	Order* temp = new Order;
-	temp = firstNode;
-	while (temp != nullptr) {
-		cout << "User: " << temp->user << "\tStatus: " << temp->status << "\nOrdered Items: \n";
-		temp->itemList.PrintAll(foodList);
-		temp = temp->next;
-	}
 }

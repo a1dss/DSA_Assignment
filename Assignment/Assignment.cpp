@@ -269,6 +269,7 @@ int main()
                     {
                         if (items.IsEmpty())
                         {
+                            cout << "Order is empty" << endl;
                             continue;
                         }
                         else
@@ -286,6 +287,7 @@ int main()
                             }
                             else if (confirm == "N")
                             {
+                             
                                 continue;
                             }
                             else

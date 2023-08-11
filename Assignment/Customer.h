@@ -18,9 +18,12 @@ private:
 public:
 	Customer();
 	Customer(Username, Password,Points,Rank);
+	Points getPoints();
+	Rank getRank();
 	void DisplayInfo();
 	void UpdateRank();
 	void AddPoints(Points amountAdded);
-	bool UsePoints(Points points);
+	bool UsePoints(int cost);
+	
 };
 

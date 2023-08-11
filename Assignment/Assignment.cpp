@@ -93,6 +93,8 @@ int main()
         string pword;
         bool islogin = false;
         bool isadmin = true;
+        Admin currAdmin;
+        Customer currCust;
         cout << "Welcome\n"
             << "[1] Log in to Existing Account\n"
             << "[2] Register New Account\n"
@@ -111,9 +113,12 @@ int main()
                 cout << "Password: ";
                 cin >> pword;
                 islogin = AdminList.Login(name, pword);
+                currAdmin = AdminList.get(name);
+                
                 if (!islogin) {
                     islogin = CustList.Login(name, pword);
                     isadmin = false;
+                    currCust = CustList.get(name);
                 }
 
                 if (islogin) {
@@ -275,19 +280,29 @@ int main()
                         else
                         {
                             items.PrintAll(FoodList);
-                            cout << "Confirm order [Y/N]:";
+                            int cost = items.CalculateTotal(FoodList);
+                            cout << "Confirm order and make payment [Y/N]:";
                             string confirm;
                             cin >> confirm;
                             if (confirm == "Y")
                             {
+                                cout << "Total Cost: " <<cost << endl;
+                                cout << "Would you like to use your points(Current Points: " << currCust.getPoints() << ") ? [Y/N] ";
+                                cin >> confirm;
+                                if (confirm == "Y") {
+                                    currCust.UsePoints(cost);
+                                }
+
+                                
                                 orderqueue.enqueue(name, items);
-                                cout << "Order successful";
+                                cout << "Order successful\n";
+                                cout << "Payment of $" << cost << " made.\n";
                                 ordering = false;
 
                             }
                             else if (confirm == "N")
                             {
-                             
+                                currCust.AddPoints(cost);
                                 continue;
                             }
                             else
@@ -299,6 +314,7 @@ int main()
                     }
 
 
+
                 }
 
             }
@@ -308,6 +324,10 @@ int main()
                 orderqueue.listOrders(name, FoodList);
 
             }
+            else if (choice == "3") {
+                cout << "Current Rank: " << currCust.getRank() << "\tCurrent Points: " << currCust.getPoints() << endl;
+            }
+           
             else
             {
                 cout << choice << endl;

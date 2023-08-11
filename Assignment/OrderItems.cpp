@@ -19,6 +19,7 @@ bool OrderItems::IsEmpty()
 
 bool OrderItems::AddtoList(int id, int qty, FoodList foodlist)
 {
+	bool exists = false;
 	if (foodlist.size<id or id<=0)
 	{
 		cout << "Invalid Input";
@@ -40,9 +41,15 @@ bool OrderItems::AddtoList(int id, int qty, FoodList foodlist)
 		Item* currnode = firstNode;
 		while (currnode->next != NULL)
 		{
+			if (currnode->ID == id) {
+				currnode->Qty += qty;
+				exists = true;
+			}
 			currnode = currnode->next;
 		}
-		currnode->next = item;
+		if (!exists) {
+			currnode->next = item;
+		}
 		return true;
 	}
 }
@@ -68,6 +75,7 @@ double OrderItems::CalculateTotal(FoodList foodlist)
 	while (currnode != NULL)
 	{
 		currtotal += foodlist.FoodArr[currnode->ID].cost * currnode->Qty;
+		currnode = currnode->next;
 	}
 	return currtotal;
 }

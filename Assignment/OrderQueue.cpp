@@ -22,7 +22,7 @@ bool OrderQueue::enqueue(string cust, ItemList items)
 	Order* order = new Order;
 	order->user = cust;
 	order->itemList = items;
-	order->status = "Preparing";
+	order->status = "In Queue";
 	order->next = NULL;
 
 
@@ -54,6 +54,11 @@ bool OrderQueue::dequeue() {
 		Order* temp = new Order;
 		temp = firstNode;
 		firstNode = firstNode->next;
+		while (firstNode->status == "Cancelled")
+		{
+			firstNode = firstNode->next;
+		}
+		firstNode->status = "Preparing";
 		delete temp;
 	}
 	return true;

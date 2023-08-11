@@ -279,8 +279,8 @@ int main()
                         }
                         else
                         {
-                            items.PrintAll(FoodList);
-                            int cost = items.CalculateTotal(FoodList);
+                            items.PrintAll(foodList);
+                            int cost = items.CalculateTotal(foodList);
                             cout << "Confirm order and make payment [Y/N]:";
                             string confirm;
                             cin >> confirm;

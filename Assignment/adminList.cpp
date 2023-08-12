@@ -90,10 +90,9 @@ Admin adminList::get(Username username) {
 	}
 
 	if (current == NULL) {
-		cout << "Item not found" << endl;
 		return Admin();
 	}
-	cout << "Item is " << current->admin.getUsername() << endl;
+	
 	return current->admin;
 }
 

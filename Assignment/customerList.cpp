@@ -88,10 +88,10 @@ Customer customerList::get(Username username) {
 	}
 
 	if (current == NULL) {
-		cout << "Item not found" << endl;
+		
 		return Customer();
 	}
-	cout << "Item is " << current->cust.getUsername() << endl;
+	
 	return current->cust;
 }
 

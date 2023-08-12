@@ -2,6 +2,8 @@
 //
 
 #include <iostream>
+#include <format>
+#include <string>
 #include "Customer.h"
 #include "Admin.h"
 #include "FoodList.h"
@@ -11,6 +13,22 @@
 #include "OrderQueue.h"
 using namespace std;
 
+
+
+bool isSubstring(const string& mainString, const string& substring) {
+    for (size_t i = 0; i <= mainString.length() - substring.length(); i++) {
+        size_t j;
+        for (j = 0; j < substring.length(); j++) {
+            if (mainString[i + j] != substring[j]) {
+                break;
+            }
+        }
+        if (j == substring.length()) {
+            return true; // Substring found
+        }
+    }
+    return false; // Substring not found
+}
 
 void AdminPanel()
 {
@@ -30,8 +48,10 @@ string FoodViewPanel()
 {
 
     cout << "[1] Show all food\n"
-        << "[2] Filter By Categories\n"
-        << "[3] Filter By Price\n"
+        << "[2] Sort By Price (Min - Max)\n"
+        << "[3] Sort by Price (Max - Min)\n"
+        << "[4] Filter By Category\n"
+        << "[5] Search by substring\n"
         << "[0] Return\n"
         << "Please Choose an Option: ";
 
@@ -178,7 +198,7 @@ int main()
                 cin >> confirm;
                 if (confirm == "Y")
                 {
-                    orderqueue.updateStatus("Completed");
+                    orderqueue.updateStatus("confirm");
 
                 }
                 else if (confirm == "N")
@@ -243,11 +263,35 @@ int main()
                             {
                                 break;
                             }
-                            else if (option == "1")
+                            else if (option == "1") //Show all food 
                             {
                                 foodList.PrintAll();
                             }
-                            else if (option == "2")
+                            else if (option == "2") { //Show all sorted by price (Min-Max)
+                                FoodList sortedFoodList;
+                                sortedFoodList.InitList();
+                                for (int i = 0; i < foodList.size;i++) {
+                                    string foodName = foodList.GetFoodItem(i).name;
+                                    double foodCost = foodList.GetFoodItem(i).cost;
+                                    int foodCataIndex = foodList.GetFoodItem(i).catagory;
+                                    sortedFoodList.Add(foodName,foodCost,foodCataIndex) ;
+                                }
+                                sortedFoodList.InsertionSort();
+                                sortedFoodList.PrintAll();
+                            }
+                            else if (option == "3") { //Show all sorted by price (Max-Min)
+                                FoodList sortedFoodList;
+                                sortedFoodList.InitList();
+                                for (int i = 0; i < foodList.size;i++) {
+                                    string foodName = foodList.GetFoodItem(i).name;
+                                    double foodCost = foodList.GetFoodItem(i).cost;
+                                    int foodCataIndex = foodList.GetFoodItem(i).catagory;
+                                    sortedFoodList.Add(foodName, foodCost, foodCataIndex);
+                                }
+                                sortedFoodList.InsertionSortReverse();
+                                sortedFoodList.PrintAll();
+                            }
+                            else if (option == "4") //Filter by Catagory
                             {
                                 foodList.ResetFilter();
                                 bool filtering = true;
@@ -282,6 +326,26 @@ int main()
                                 }
                                 foodList.PrintByCata();
                             }
+                            
+                            else if (option == "5") {
+                                string substring;
+                                cout << "Enter Substring: ";
+                                cin.ignore();
+                                getline(cin,substring);
+                                bool contains = false;
+                                for (int i = 0; i < foodList.size;i++) {
+                                    string foodName = foodList.GetFoodItem(i).name;
+                                    double foodCost = foodList.GetFoodItem(i).cost;
+                                    int foodId = foodList.GetFoodItem(i).id;
+                                    if (isSubstring(foodName, substring)) {
+                                        cout << format("ID:{0:<5}Name:{1:15}Price:{2:.2f}", foodId,foodName,foodCost) << endl;
+                                        contains = true;
+                                    }
+                                }
+                                if (!contains) {
+                                    cout << "Substring not found!";
+                                }
+                            }
                         }
                     }
                     else if (orderchoice == "3")
@@ -305,6 +369,9 @@ int main()
                                 cin >> confirm;
                                 if (confirm == "Y") {
                                     currCust.UsePoints(cost);
+                                }
+                                else {
+                                    currCust.AddPoints(cost);
                                 }
 
                                 

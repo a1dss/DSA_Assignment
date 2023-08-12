@@ -76,10 +76,9 @@ string OrderQueue::getStatus(int pos)
 }
 
 
-void OrderQueue::updateStatus(string status)
+void OrderQueue::updateStatus(string s)
 {
-	Order* currnode = firstNode;
-	currnode->status = status;
+	firstNode->status = s;
 }
 
 void OrderQueue::cancelOrder(string user, int pos)

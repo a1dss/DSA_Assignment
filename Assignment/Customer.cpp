@@ -24,15 +24,16 @@ void Customer::DisplayInfo() {
 
 void Customer::UpdateRank()
 {
-    if (points >= 100 && (rank!= "Gold" || rank !="Platinum")) {
-        rank = "Silver";
-    }
-    else if (points >= 200 && (rank!= "Platinum")) {
-        rank = "Gold";
-    }
-    else if (points >= 300) {
+    if (points >= 300) {
         rank = "Platinum";
     }
+    else if (points >= 200) {
+        rank = "Gold";
+    }
+    else {
+        rank = "Silver";
+    }
+
 }
 void Customer::AddPoints(Points amountSpent)
 {
@@ -44,6 +45,9 @@ void Customer::AddPoints(Points amountSpent)
 
 bool Customer::UsePoints(int cost)
 {
+    int discountAmt;
+    int finalCost;
+
     Points pointsWorth = 1; // Default value for points' worth
 
     if (rank == "Silver") {
@@ -56,9 +60,16 @@ bool Customer::UsePoints(int cost)
         pointsWorth = 4; // Points are worth 4 at Platinum rank
     }
     
-    int discountAmt = points * pointsWorth/100;
-    int finalCost = cost - discountAmt;
-    points = 0;
+    if ((points * pointsWorth)/100 >= cost) {
+        discountAmt = cost;
+        finalCost = 0;
+        points -= (cost * 100)/pointsWorth;
+    }
+    else {
+        discountAmt = (points * pointsWorth) / 100;
+        finalCost = cost - discountAmt;
+        points = 0;
+    }
     cout << "Discounted Amount: " << discountAmt << endl;
     cout << "Final Cost: " << finalCost << endl;
     cout << "Points reset back to: " << points << endl;

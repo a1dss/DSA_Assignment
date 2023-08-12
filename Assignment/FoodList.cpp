@@ -32,6 +32,7 @@ void FoodList::PrintAll()
 
 }
 
+
 void FoodList::ShowCata()
 {
 	cout << "Catagories: ";
@@ -114,4 +115,34 @@ int FoodList::ReturnCatNum(string category) {
 	}
 	return count + 1;
 	
+}
+
+FoodList::FoodItem FoodList::GetFoodItem(int index) {
+	return FoodArr[index];
+}
+
+void FoodList::InsertionSort() {
+	for (int i = 1; i < size; i++) {
+		FoodItem data = FoodArr[i];
+
+		int last = i;
+		while ((last > 0) && (FoodArr[last - 1].cost > data.cost)) {
+			FoodArr[last] = FoodArr[last - 1];
+			last--;
+		}
+		FoodArr[last] = data;
+	}
+}
+
+void FoodList::InsertionSortReverse() {
+	for (int i = 1; i < size; i++) {
+		FoodItem data = FoodArr[i];
+
+		int last = i;
+		while ((last > 0) && (FoodArr[last - 1].cost < data.cost)) {
+			FoodArr[last] = FoodArr[last - 1];
+			last--;
+		}
+		FoodArr[last] = data;
+	}
 }

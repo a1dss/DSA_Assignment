@@ -40,12 +40,15 @@ public:
 	//Initial List creation(Food)
 	void InitList();
 
+
 	//Add food to list
 	void Add(string name, double cost, int catagory);
 
 
 	//List all food option and prices
 	void PrintAll();
+
+	
 
 	//List all food filtered by categories
 	void PrintByCata();
@@ -66,4 +69,7 @@ public:
 	void DefaultFood();
 
 	int ReturnCatNum(string category);
+	FoodItem GetFoodItem(int index);
+	void InsertionSort();
+	void InsertionSortReverse();
 };

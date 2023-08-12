@@ -91,8 +91,9 @@ Customer customerList::get(Username username) {
 		
 		return Customer();
 	}
-	
+
 	return current->cust;
+
 }
 
 bool customerList::isEmpty() {
@@ -129,4 +130,18 @@ bool customerList::Login(Username username, Password pwrod) {
 	}
 	cout << "Invalid Username or Password" << endl;
 	return false;
+}
+
+void customerList::update(Customer customer)
+{
+	int index = hash(customer.getUsername().length());
+
+	CustNode* current = CustList[index];
+	while (current != nullptr) {
+		if (current->cust.getUsername() == customer.getUsername())
+		{
+			current->cust = customer;
+		}
+		current = current->next;
+	}
 }

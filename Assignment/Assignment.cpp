@@ -156,7 +156,7 @@ int main()
             cin >> newName;
             cout << "Enter Password: ";
             cin >> newPword;
-            Customer newCust =  Customer(newName, newPword,DEFAULT_POINTS,DEFAULT_RANK);
+            Customer newCust =  Customer(newName, newPword,0,"Bronze");
             CustList.add(newCust);
 
 
@@ -452,7 +452,7 @@ int main()
                 cout << "Invalid Input" << endl;
             }
 
-
+            CustList.update(currCust);
         }
     }
 

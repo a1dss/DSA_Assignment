@@ -35,7 +35,7 @@ void Customer::UpdateRank()
     }
 
 }
-void Customer::AddPoints(Points amountSpent)
+void Customer::AddPoints(double amountSpent)
 {
     amountSpent *= 100;  // Convert to cents
     points += amountSpent/10; // Every 10 cents = 1 point

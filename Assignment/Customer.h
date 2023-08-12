@@ -7,8 +7,7 @@
 typedef int Points;
 typedef string Rank;
 
-const int DEFAULT_POINTS = 0;
-const string DEFAULT_RANK = "Bronze";
+
 
 using namespace std;
 class Customer : public User
@@ -23,7 +22,7 @@ public:
 	Rank getRank();
 	void DisplayInfo();
 	void UpdateRank();
-	void AddPoints(Points amountAdded);
+	void AddPoints(double amountAdded);
 	double UsePoints(double cost);
 	
 };

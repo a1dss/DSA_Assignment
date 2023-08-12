@@ -122,10 +122,12 @@ int main()
         cin >> option;
         
         if (option == "1") {
-
+            
             cout << "Please Enter the Following:\n";
             while (true) {
-                
+                islogin = false;
+                isadmin = true;
+
                 cout << "\nUsername: ";
                 cin >> name;
                 cout << "Password: ";
@@ -137,6 +139,7 @@ int main()
                     islogin = CustList.Login(name, pword);
                     isadmin = false;
                     currCust = CustList.get(name);
+                    cout << currCust.getPoints()<<currCust.getRank();
                 }
 
                 if (islogin) {
@@ -198,7 +201,7 @@ int main()
                 cin >> confirm;
                 if (confirm == "Y")
                 {
-                    orderqueue.updateStatus("confirm");
+                    orderqueue.dequeue();
 
                 }
                 else if (confirm == "N")
@@ -377,7 +380,7 @@ int main()
                                 
                                 orderqueue.enqueue(name, items);
                                 cout << "Order successful\n";
-                                cout << "Payment of $" << cost << " made.\n";
+                                cout << "Payment of $" << cost << "(exclusive of discount) made.\n";
                                 ordering = false;
 
                             }

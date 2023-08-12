@@ -30,7 +30,7 @@ void Customer::UpdateRank()
     else if (points >= 200) {
         rank = "Gold";
     }
-    else {
+    else if (points >= 100){
         rank = "Silver";
     }
 

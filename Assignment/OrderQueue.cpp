@@ -44,6 +44,7 @@ bool OrderQueue::enqueue(string cust, ItemList items)
 
 bool OrderQueue::dequeue() {
 	if (isEmpty()) {
+		cout << "No Order to Dequeue" << endl;
 		return false;
 	}
 	if (firstNode == lastNode) {

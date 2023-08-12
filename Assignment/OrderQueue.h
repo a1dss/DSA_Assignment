@@ -21,7 +21,7 @@ class OrderQueue
 	};
 
 	
-
+private:
 	Order* firstNode;
 	Order* lastNode;
 

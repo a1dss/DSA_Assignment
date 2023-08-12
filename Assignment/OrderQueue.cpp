@@ -105,7 +105,7 @@ void OrderQueue::cancelOrder(string user, int pos)
 	}
 }
 
-//<<<<<<< Updated upstream
+
 void OrderQueue::listOrders(FoodList foodList) {
 	if (isEmpty()) {
 		return;
@@ -122,14 +122,11 @@ void OrderQueue::listOrders(FoodList foodList) {
 	}
 
 }
-//>>>>>>> Stashed changes
+
 
 bool OrderQueue::listOrders(string user, FoodList foodList)
 {
-	//if (isEmpty()) {
-	//	cout << "No Orders Made\n";
-	//	return false;
-	//}
+
 	Order* temp = new Order;
 	temp = firstNode;
 	int i = 1;

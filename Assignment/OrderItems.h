@@ -14,8 +14,10 @@ class OrderItems
 		Item* next;
 	};
 
-public:
+private:
 	Item* firstNode;
+public:
+
 
 	//constructor
 	OrderItems();

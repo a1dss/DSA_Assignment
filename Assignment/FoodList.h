@@ -9,7 +9,7 @@ typedef string Name;
 typedef double Cost;
 typedef int CategoryID;
 typedef int foodID;
-int const MAX_SIZEf = 1000;
+int const MAX_SIZEf = 100;
 int const cate_count = 8;
 
 

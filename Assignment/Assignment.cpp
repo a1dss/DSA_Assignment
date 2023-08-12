@@ -139,6 +139,7 @@ int main()
                     islogin = CustList.Login(name, pword);
                     isadmin = false;
                     currCust = CustList.get(name);
+                    
                     cout << currCust.getPoints()<<currCust.getRank();
                 }
 

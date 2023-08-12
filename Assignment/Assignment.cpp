@@ -140,7 +140,7 @@ int main()
                     isadmin = false;
                     currCust = CustList.get(name);
                     
-                    cout << currCust.getPoints()<<currCust.getRank();
+
                 }
 
                 if (islogin) {

@@ -53,7 +53,7 @@ public:
 	void listOrders(FoodList foodList);
 
 	//List all orders of current user
-	void listOrders(string user, FoodList foodlist);
+	bool listOrders(string user, FoodList foodlist);
 
 	//Change status to cancel if status is preparing and is the surrent user's order
 	void cancelOrder(string user, int pos);

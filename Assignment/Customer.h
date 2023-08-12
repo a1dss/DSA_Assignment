@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <format>
 #include "User.h"
 
 typedef int Points;
@@ -23,7 +24,7 @@ public:
 	void DisplayInfo();
 	void UpdateRank();
 	void AddPoints(Points amountAdded);
-	bool UsePoints(int cost);
+	double UsePoints(double cost);
 	
 };
 

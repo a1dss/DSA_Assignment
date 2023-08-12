@@ -37,6 +37,8 @@ public:
 	void print();
 	
 	bool Login(Username username, Password pword);
+
+	void update(Customer customer);
 };
 
 

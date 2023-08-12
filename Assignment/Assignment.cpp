@@ -165,6 +165,7 @@ int main()
             cout << "Invalid Input\n";
         }
         while (islogin && isadmin) {
+            orderqueue.dequeue();
             int option;
             AdminPanel();
             cin >> option;
@@ -198,7 +199,7 @@ int main()
                 cin >> confirm;
                 if (confirm == "Y")
                 {
-                    orderqueue.updateStatus("confirm");
+                    orderqueue.updateStatus("Completed");
 
                 }
                 else if (confirm == "N")
@@ -223,6 +224,7 @@ int main()
         }
         while (islogin && !isadmin)
         {
+            orderqueue.dequeue();
             string choice = UserPanel();
             if (choice == "0")
             {
@@ -358,17 +360,17 @@ int main()
                         else
                         {
                             items.PrintAll(foodList);
-                            int cost = items.CalculateTotal(foodList);
+                            double cost = items.CalculateTotal(foodList);
                             cout << "Confirm order and make payment [Y/N]:";
                             string confirm;
                             cin >> confirm;
                             if (confirm == "Y")
                             {
-                                cout << "Total Cost: " <<cost << endl;
+                                cout << format("Total Cost: ${:.2f}", cost) << endl;
                                 cout << "Would you like to use your points(Current Points: " << currCust.getPoints() << ") ? [Y/N] ";
                                 cin >> confirm;
                                 if (confirm == "Y") {
-                                    currCust.UsePoints(cost);
+                                    cost = currCust.UsePoints(cost);
                                 }
                                 else {
                                     currCust.AddPoints(cost);
@@ -377,7 +379,7 @@ int main()
                                 
                                 orderqueue.enqueue(name, items);
                                 cout << "Order successful\n";
-                                cout << "Payment of $" << cost << " made.\n";
+                                cout << format("Payment of ${:.2f} made\n", cost) << endl;
                                 ordering = false;
 
                             }
@@ -393,6 +395,10 @@ int main()
                         }
 
                     }
+                    else
+                    {
+                        cout << "Invalid Input" << endl;
+                    }
 
 
 
@@ -403,24 +409,34 @@ int main()
             {
      
                 char cancel;
-                orderqueue.listOrders(name, foodList);
-                cout << "Cancel Order[Y/N]: ";
-                cin >> cancel;
-                if (towupper(cancel) == 'Y')
-                {
-                    cout << "Input Order Number: ";
-                    int ornum;
-                    cin >> ornum;
-                    orderqueue.cancelOrder(name, ornum);
-                }
-                else if (towupper(cancel) == 'N')
-                {
-                    continue;
+                bool hasorders;
+                hasorders = orderqueue.listOrders(name, foodList);
+                if (hasorders)
+                { 
+                    cout << "Cancel Order[Y/N]: ";
+                    cin >> cancel;
+                    if (towupper(cancel) == 'Y')
+                    {
+                        cout << "Input Order Number: ";
+                        int ornum;
+                        cin >> ornum;
+                        orderqueue.cancelOrder(name, ornum);
+                    }
+                    else if (towupper(cancel) == 'N')
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        cout << "Invalid input\n";
+                    }
                 }
                 else
                 {
-                    cout << "Invalid input\n";
+                    
                 }
+
+
 
             }
             else if (choice == "3") {

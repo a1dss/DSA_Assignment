@@ -43,10 +43,10 @@ void Customer::AddPoints(Points amountSpent)
     cout << "New Rank: " << rank << endl;
 }
 
-bool Customer::UsePoints(int cost)
+double Customer::UsePoints(double cost)
 {
-    int discountAmt;
-    int finalCost;
+    double discountAmt;
+    double finalCost;
 
     Points pointsWorth = 1; // Default value for points' worth
 
@@ -71,9 +71,9 @@ bool Customer::UsePoints(int cost)
         points = 0;
     }
     cout << "Discounted Amount: " << discountAmt << endl;
-    cout << "Final Cost: " << finalCost << endl;
+    cout << format("Final Cost: ${:.2f}", finalCost) << endl;
     cout << "Points reset back to: " << points << endl;
     AddPoints(finalCost);
-    return true;
+    return finalCost;
 }
 

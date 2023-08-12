@@ -43,7 +43,7 @@ bool OrderQueue::enqueue(string cust, ItemList items)
 }
 
 bool OrderQueue::dequeue() {
-	if (isEmpty()) {
+	if (isEmpty() || firstNode->status == "Preparing") {
 		return false;
 	}
 	if (firstNode == lastNode) {
@@ -86,8 +86,14 @@ void OrderQueue::cancelOrder(string user, int pos)
 	Order* currnode = firstNode;
 	for (int i = 1; i < pos; i++)
 	{
-		cout << i;
+		if (currnode== nullptr)
+		{
+			cout << "Invalid Order" << endl;
+			return;
+		}
+
 		currnode = currnode->next;
+
 	}
 	if (currnode->user != user || currnode->status == "Completed")
 	{
@@ -108,31 +114,47 @@ void OrderQueue::listOrders(FoodList foodList) {
 	temp = firstNode;
 	int i = 1;
 	while (temp != nullptr) {
-		cout << i << ")   " << "User: " << temp->user << "\tStatus: " << temp->status << "\nOrdered Items: \n";
+		cout << endl;
+		cout << "Order No: " << i << "    User: " << temp->user << "\tStatus: " << temp->status << endl;
 		temp->itemList.PrintAll(foodList);
 		temp = temp->next;
 		i++;
 	}
+
 }
 //>>>>>>> Stashed changes
 
-void OrderQueue::listOrders(string user, FoodList foodList)
+bool OrderQueue::listOrders(string user, FoodList foodList)
 {
-	if (isEmpty()) {
-		return;
-	}
+	//if (isEmpty()) {
+	//	cout << "No Orders Made\n";
+	//	return false;
+	//}
 	Order* temp = new Order;
 	temp = firstNode;
 	int i = 1;
+	int check = 0;
 	while (temp != nullptr) {
 		if (temp->user == user)
 		{
-			cout << i << ")   " << "User: " << "User: " << temp->user << "\tStatus: " << temp->status << "\nOrdered Items: \n";
+			cout << endl;
+			cout << "Order No: " << i << "    User: " << temp->user << "\tStatus: " << temp->status << endl;
 			temp->itemList.PrintAll(foodList);
+			check++;
+
 		}
 
 		temp = temp->next;
 		i++;
+	}
+	if (check == 0)
+	{
+		cout << "No Orders Made\n";
+		return false;
+	}
+	else
+	{
+		return true;
 	}
 }
 

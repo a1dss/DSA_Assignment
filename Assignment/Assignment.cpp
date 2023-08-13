@@ -16,6 +16,7 @@
 #include "customerList.h"
 #include "OrderItems.h"
 #include "OrderQueue.h"
+#include <regex>
 using namespace std;
 
 
@@ -40,8 +41,9 @@ void AdminPanel()
     cout << "Welcome\n"
         << "[1] See Order Details\n"
         << "[2] Add food item\n"
-        << "[3] See all food item\n"
-        << "[4] Update Order status\n"
+        << "[3] Remove food item\n"
+        << "[4] See all food item\n"
+        << "[5] Update Order status\n"
         << "[0] Logout\n"
         << "Please Choose an Option: ";
    
@@ -181,35 +183,80 @@ int main()
 
         //Admin interface
         while (islogin && isadmin) {
-            orderqueue.dequeue();
-            int option;
+           //orderqueue.dequeue();
+            string option;
             AdminPanel();
             cin >> option;
             
-            if (option == 1) { //See Order Details
+            if (option == "1") { //See Order Details
                 orderqueue.listOrders(foodList);
             }
 
-            else if (option == 2) { //Add Food Item
+            else if (option == "2") { //Add Food Item
+                cout << "Current Menu" << endl;
+                foodList.PrintAll();
                 string newFName;
-                double newFCost;
+             
+                double newFCost=0;
                 string newFCat;
-                cout << "Enter New Food Name: ";
-                cin.ignore();             //Reads entire line, including spaces
-                getline(cin, newFName);
-                cout << "Enter New Food Cost: ";
-                cin >> newFCost;
-                cout << "Enter New Food Category: ";
-                cin >> newFCat;
-                int newFId = foodList.ReturnCatNum(newFCat);
-                foodList.Add(newFName, newFCost, newFId);
-            }
 
-            else if (option == 3) { //See All Food Item
+                // Get user input
+                cout << "Enter food name: ";
+                cin.ignore();
+                getline(cin, newFName);
+
+                
+                cout << "Enter food cost: ";
+                string costInput;
+                getline(cin, costInput);
+
+                cout << "Enter food category: ";
+                getline(cin, newFCat);
+
+                try {
+                    newFCost = stod(costInput);
+                    if (newFName.empty() || newFCost <= 0 || newFCat.empty()) {
+                        throw invalid_argument("Invalid input. All fields must be filled.");
+                    }
+
+                    if (foodList.Exist(newFName)) {
+                        throw runtime_error("Food item already exists in the list.");
+                    }
+
+                    int newFId = foodList.ReturnCatNum(newFCat);
+                    foodList.Add(newFName, newFCost, newFId);
+
+                    cout << "New food item added successfully!" << endl;
+                }
+                catch (const exception& e) {
+                    cerr << "An error occurred: " << e.what() << endl;
+                }
+                cout << "New Menu" << endl;
                 foodList.PrintAll();
             }
 
-            else if (option == 4) { // Update Order Status
+            else if (option == "3") {
+                string stringIndex;
+                int index = 0;
+                cout << "Current Menu" << endl;
+                foodList.PrintAll();
+                cout << "Enter Index to Remove";
+                cin >> stringIndex;
+                try {
+                     index = stoi(stringIndex);
+                }
+                catch (const exception& e) {
+                    
+                }
+                foodList.Remove(index - 1);
+                cout << "New Menu" << endl;
+                foodList.PrintAll();
+            }
+            else if (option == "4") { //See All Food Item
+                foodList.PrintAll();
+            }
+
+            else if (option == "5") { // Update Order Status
                 cout << "Change status of first order to completed [Y/N]:";
                 string confirm;
                 cin >> confirm;
@@ -228,10 +275,11 @@ int main()
                 }
             }
 
-            else if (option == 0) { // Log out
+            else if (option == "0") { // Log out
                 islogin = false;
                 isadmin = true;
             }
+
             else {
                 cout << "Invalid Input" << endl;
             }
@@ -264,15 +312,41 @@ int main()
                     }
                     else if (orderchoice == "1")
                     {
-                        cout << "Input Food ID:";
-                        int foodno;
-                        cin >> foodno;
-                        cout << "Input Quantity:";
-                        int qty;
-                        cin >> qty;
+                        while (true) {
+                            cout << "Input Food ID:";
+                            int foodno = -1;
+                            int qty = -1;
+                            bool errorPrinted = false;
+                            string stringFoodNo;
+                            cin >> stringFoodNo;
+                           
+                            try {
+                                foodno = stoi(stringFoodNo);
+                            }
+                            catch (const exception& e) {
+                                cerr << "Invalid Input" << endl;
+                                continue;
+                            }
+                            cout << "Input Quantity:";
+                            string stringQty;
+                            cin >> stringQty;
 
-                        items.AddtoList(foodno, qty, foodList);
-                        items.PrintAll(foodList);
+                            try {
+                               
+                                qty = stoi(stringQty);
+
+                            }
+                            catch (const exception& e) {
+                                cerr << "Invalid Input" << endl;
+                                continue;
+
+                            }
+                            items.AddtoList(foodno, qty, foodList); 
+                            items.PrintAll(foodList);
+                            break;
+                        }
+                       
+                        
 
                     }
                     else if (orderchoice == "2")
@@ -368,6 +442,9 @@ int main()
                                     cout << "Substring not found!";
                                 }
                             }
+                            else {
+                                cout << "Invalid Input" << endl;
+                            }
                         }
                     }
                     else if (orderchoice == "3")
@@ -391,16 +468,25 @@ int main()
                                 cin >> confirm;
                                 if (confirm == "Y") {
                                     cost = currCust.UsePoints(cost);
+
+                                    orderqueue.enqueue(name, items);
+                                    cout << "Order successful\n";
+                                    cout << format("Payment of ${:.2f} made\n", cost) << endl;
+                                    ordering = false;
+                                }
+                                else if (confirm == "N"){
+                                    currCust.AddPoints(cost);
+
+                                    orderqueue.enqueue(name, items);
+                                    cout << "Order successful\n";
+                                    cout << format("Payment of ${:.2f} made\n", cost) << endl;
+                                    ordering = false;
                                 }
                                 else {
-                                    currCust.AddPoints(cost);
+                                    cout << "Invalid Input" << endl;
                                 }
 
                                 
-                                orderqueue.enqueue(name, items);
-                                cout << "Order successful\n";
-                                cout << format("Payment of ${:.2f} made\n", cost) << endl;
-                                ordering = false;
 
                             }
                             else if (confirm == "N")

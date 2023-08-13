@@ -56,6 +56,9 @@ bool OrderItems::AddtoList(int id, int qty, FoodList foodlist)
 
 void OrderItems::PrintAll(FoodList foodlist)
 {
+	if (IsEmpty()) {
+		return;
+	}
 	cout << "Items: " << endl;
 	Item* currnode = firstNode;
 	while (currnode != NULL)

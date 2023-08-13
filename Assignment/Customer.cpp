@@ -24,13 +24,13 @@ void Customer::DisplayInfo() {
 
 void Customer::UpdateRank()
 {
-    if (points >= 300) {
+    if (points >= 300 ) {
         rank = "Platinum";
     }
-    else if (points >= 200) {
+    else if (points >= 200 && rank !="Platinum") {
         rank = "Gold";
     }
-    else if (points >= 100){
+    else if (points >= 100 && (rank != "Platinum" && rank != "Gold")) {
         rank = "Silver";
     }
 
@@ -66,7 +66,7 @@ double Customer::UsePoints(double cost)
         points -= (cost * 100)/pointsWorth;
     }
     else {
-        discountAmt = (points * pointsWorth) / 100;
+        discountAmt = (points * pointsWorth) / 100.0;
         finalCost = cost - discountAmt;
         points = 0;
     }

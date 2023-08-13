@@ -12,7 +12,6 @@ private:
 	//Dictionary Implementation
 	struct AdminNode {
 		Admin admin;
-
 		AdminNode* next;
 	};
 

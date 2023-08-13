@@ -22,6 +22,20 @@ void FoodList::Add(string name, double cost, int cataindex)
 
 }
 
+void FoodList::Remove(int id) {
+	if (id > size - 1 || id < 0) {
+		cout << "Invalid ID" << endl;
+	}
+	else {
+		for (int i = id; i < size - 1; i++) {
+			FoodArr[i + 1].id -= 1;
+			FoodArr[i] = FoodArr[i + 1];
+			
+		}
+		size--;
+	}
+}
+
 void FoodList::PrintAll()
 {
 	for (int i = 0; i < size; i++)
@@ -145,4 +159,13 @@ void FoodList::InsertionSortReverse() {
 		}
 		FoodArr[last] = data;
 	}
+}
+
+bool FoodList::Exist(string name) {
+	for (int i = 0; i < size; i++) {
+		if (name == FoodArr[i].name) {
+			return true;
+		}
+	}
+	return false;
 }

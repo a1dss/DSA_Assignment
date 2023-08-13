@@ -296,15 +296,41 @@ int main()
                     }
                     else if (orderchoice == "1")
                     {
-                        cout << "Input Food ID:";
-                        int foodno;
-                        cin >> foodno;
-                        cout << "Input Quantity:";
-                        int qty;
-                        cin >> qty;
+                        while (true) {
+                            cout << "Input Food ID:";
+                            int foodno = -1;
+                            int qty = -1;
+                            bool errorPrinted = false;
+                            string stringFoodNo;
+                            cin >> stringFoodNo;
+                           
+                            try {
+                                foodno = stoi(stringFoodNo);
+                            }
+                            catch (const exception& e) {
+                                cerr << "Invalid Input" << endl;
+                                continue;
+                            }
+                            cout << "Input Quantity:";
+                            string stringQty;
+                            cin >> stringQty;
 
-                        items.AddtoList(foodno, qty, foodList);
-                        items.PrintAll(foodList);
+                            try {
+                               
+                                qty = stoi(stringQty);
+
+                            }
+                            catch (const exception& e) {
+                                cerr << "Invalid Input" << endl;
+                                continue;
+
+                            }
+                            items.AddtoList(foodno, qty, foodList); 
+                            items.PrintAll(foodList);
+                            break;
+                        }
+                       
+                        
 
                     }
                     else if (orderchoice == "2")
@@ -400,6 +426,9 @@ int main()
                                     cout << "Substring not found!";
                                 }
                             }
+                            else {
+                                cout << "Invalid Input" << endl;
+                            }
                         }
                     }
                     else if (orderchoice == "3")
@@ -423,16 +452,25 @@ int main()
                                 cin >> confirm;
                                 if (confirm == "Y") {
                                     cost = currCust.UsePoints(cost);
+
+                                    orderqueue.enqueue(name, items);
+                                    cout << "Order successful\n";
+                                    cout << format("Payment of ${:.2f} made\n", cost) << endl;
+                                    ordering = false;
+                                }
+                                else if (confirm == "N"){
+                                    currCust.AddPoints(cost);
+
+                                    orderqueue.enqueue(name, items);
+                                    cout << "Order successful\n";
+                                    cout << format("Payment of ${:.2f} made\n", cost) << endl;
+                                    ordering = false;
                                 }
                                 else {
-                                    currCust.AddPoints(cost);
+                                    cout << "Invalid Input" << endl;
                                 }
 
                                 
-                                orderqueue.enqueue(name, items);
-                                cout << "Order successful\n";
-                                cout << format("Payment of ${:.2f} made\n", cost) << endl;
-                                ordering = false;
 
                             }
                             else if (confirm == "N")

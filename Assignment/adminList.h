@@ -11,7 +11,6 @@ class adminList
 private:
 	struct AdminNode {
 		Admin admin;
-
 		AdminNode* next;
 	};
 

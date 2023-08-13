@@ -66,7 +66,7 @@ double Customer::UsePoints(double cost)
         points -= (cost * 100)/pointsWorth;
     }
     else {
-        discountAmt = (points * pointsWorth) / 100;
+        discountAmt = (points * pointsWorth) / 100.0;
         finalCost = cost - discountAmt;
         points = 0;
     }

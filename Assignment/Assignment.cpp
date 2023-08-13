@@ -20,7 +20,8 @@
 using namespace std;
 
 
-
+// Uses Iterative Search to look through foodList to see if substring exists
+// takes in string& and string& returns bool
 bool isSubstring(const string& mainString, const string& substring) {
     for (size_t i = 0; i <= mainString.length() - substring.length(); i++) {
         size_t j;
@@ -100,6 +101,7 @@ string OrderPanel()
 
 int main()
 {
+    // Init Process
     FoodList foodList;
     customerList CustList;
     adminList AdminList;
@@ -130,6 +132,7 @@ int main()
         string option;
         cin >> option;
         
+        // Login 
         if (option == "1") {
             
             cout << "Please Enter the Following:\n";
@@ -158,6 +161,8 @@ int main()
             }
 
         }
+
+        // Register
         else if (option == "2") { //For register, assume only Customers can register via the page. 
             string newName;
             string newPword;
@@ -170,6 +175,8 @@ int main()
 
 
         }
+        // Leave
+
         else if (option == "0") {
             cout << "Goodbye";
             return 0;
@@ -183,7 +190,7 @@ int main()
 
         //Admin interface
         while (islogin && isadmin) {
-           //orderqueue.dequeue();
+           
             string option;
             AdminPanel();
             cin >> option;
@@ -235,7 +242,7 @@ int main()
                 foodList.PrintAll();
             }
 
-            else if (option == "3") {
+            else if (option == "3") { // Remove Food Item
                 string stringIndex;
                 int index = 0;
                 cout << "Current Menu" << endl;
@@ -252,7 +259,7 @@ int main()
                 cout << "New Menu" << endl;
                 foodList.PrintAll();
             }
-            else if (option == "4") { //See All Food Item
+            else if (option == "4") { //Print All Food Item
                 foodList.PrintAll();
             }
 

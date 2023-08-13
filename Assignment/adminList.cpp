@@ -1,5 +1,9 @@
+// Team Member 1: Aidan Toh Qun Kai, S10243503 
+// Team Member 2: Goh Bing Lo, S10242470
+
 #include "adminList.h"
 
+// Constructor to create the list
 adminList::adminList() {
 	for (int i = 0;i < ADMIN_SIZE;i++) {
 		AdminList[i] = nullptr;
@@ -7,6 +11,7 @@ adminList::adminList() {
 	adminSize = 0;
 }
 
+// Destructor to destroy the list
 adminList::~adminList() {
 	for (int i = 0; i < ADMIN_SIZE; i++) {
 		delete AdminList[i];
@@ -15,7 +20,8 @@ adminList::~adminList() {
 	adminSize = 0;
 }
 
-
+// Hash function to get	 the index
+// takes in string returns int
 int adminList::hash(string username) {
 	const int prime = 31;  // A prime number for better distribution
 	int len = username.length();
@@ -28,6 +34,7 @@ int adminList::hash(string username) {
 	return hashValue % ADMIN_SIZE;
 }
 
+// Add 
 bool adminList::add(Admin admin) {
 	int index = hash(admin.getUsername());
 

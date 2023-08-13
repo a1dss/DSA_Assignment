@@ -7,6 +7,9 @@ using namespace std;
 
 class OrderItems
 {
+private:
+
+	//Linked list implementation
 	struct Item
 	{
 		int ID;
@@ -14,7 +17,7 @@ class OrderItems
 		Item* next;
 	};
 
-private:
+
 	Item* firstNode;
 public:
 
@@ -30,10 +33,10 @@ public:
 	bool IsEmpty();
 
 	//Add Item to list
-	//Prequisite: id must exist in foodlist
+	//Prequisite: id must exist in foodlist, qty > 0
 	bool AddtoList(int id, int qty, FoodList foodlist);
 
-	//Calculate total price
+	//Calculate total price and returns the value
 	double CalculateTotal(FoodList foodlist);
 
 	//Show current items

@@ -11,6 +11,7 @@ typedef OrderItems ItemList;
 
 class OrderQueue
 {
+	//Queue Implementation
 	struct Order
 	{
 		Orderer user;

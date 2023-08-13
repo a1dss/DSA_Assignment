@@ -33,6 +33,7 @@ private:
 	bool Filters[cate_count] = { false,false,false,false,false,false,false,false };
 
 public:
+	//Array Implementation
 	int size;
 	FoodItem FoodArr[MAX_SIZEf];
 
@@ -70,6 +71,10 @@ public:
 
 	int ReturnCatNum(string category);
 	FoodItem GetFoodItem(int index);
+
+	// Sorting function for list by cost (lowest to highest)
 	void InsertionSort();
+
+	// Sorting function for list by cost (highest to lowest)
 	void InsertionSortReverse();
 };

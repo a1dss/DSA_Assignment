@@ -9,6 +9,7 @@ class Admin :public User
 private:
 
 public:
+	//Constructors
 	Admin();
 	Admin(Username, Password);
 

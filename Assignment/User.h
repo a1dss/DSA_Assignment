@@ -7,6 +7,8 @@ using namespace std;
 typedef string Username;
 typedef string Password;
 
+
+//Parent class to User and Admin
 class User
 {
 private:

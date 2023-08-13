@@ -1,5 +1,10 @@
-// Assignment (1).cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+// Assignment 
+// 
+// Team Member 1: Aidan Toh Qun Kai, S10243503 
+// Team Member 2: Goh Bing Lo, S10242470
+// 
+
+
 
 #include <iostream>
 #include <format>
@@ -106,6 +111,8 @@ int main()
     foodList.InitList();
     foodList.DefaultFood();
     
+
+    //Login Page
     while (true) {
         string name;
         string pword;
@@ -168,6 +175,11 @@ int main()
         else {
             cout << "Invalid Input\n";
         }
+
+
+
+
+        //Admin interface
         while (islogin && isadmin) {
             orderqueue.dequeue();
             int option;
@@ -226,6 +238,10 @@ int main()
             
 
         }
+
+
+
+        //Customer interface
         while (islogin && !isadmin)
         {
             orderqueue.dequeue();

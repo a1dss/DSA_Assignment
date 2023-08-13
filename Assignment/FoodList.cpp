@@ -146,3 +146,12 @@ void FoodList::InsertionSortReverse() {
 		FoodArr[last] = data;
 	}
 }
+
+bool FoodList::Exist(string name) {
+	for (int i = 0; i < size; i++) {
+		if (name == FoodArr[i].name) {
+			return true;
+		}
+	}
+	return false;
+}

@@ -24,13 +24,13 @@ void Customer::DisplayInfo() {
 
 void Customer::UpdateRank()
 {
-    if (points >= 300) {
+    if (points >= 300 ) {
         rank = "Platinum";
     }
-    else if (points >= 200) {
+    else if (points >= 200 && rank !="Platinum") {
         rank = "Gold";
     }
-    else if (points >= 100){
+    else if (points >= 100 && (rank != "Platinum" && rank != "Gold")) {
         rank = "Silver";
     }
 

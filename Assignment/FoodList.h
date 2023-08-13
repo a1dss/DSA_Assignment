@@ -72,4 +72,5 @@ public:
 	FoodItem GetFoodItem(int index);
 	void InsertionSort();
 	void InsertionSortReverse();
+	bool Exist(string name);
 };

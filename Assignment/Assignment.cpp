@@ -11,6 +11,7 @@
 #include "customerList.h"
 #include "OrderItems.h"
 #include "OrderQueue.h"
+#include <regex>
 using namespace std;
 
 
@@ -169,35 +170,60 @@ int main()
             cout << "Invalid Input\n";
         }
         while (islogin && isadmin) {
-            orderqueue.dequeue();
-            int option;
+           //orderqueue.dequeue();
+            string option;
             AdminPanel();
             cin >> option;
             
-            if (option == 1) { //See Order Details
+            if (option == "1") { //See Order Details
                 orderqueue.listOrders(foodList);
             }
 
-            else if (option == 2) { //Add Food Item
+            else if (option == "2") { //Add Food Item
+
                 string newFName;
-                double newFCost;
+             
+                double newFCost=0;
                 string newFCat;
-                cout << "Enter New Food Name: ";
-                cin.ignore();             //Reads entire line, including spaces
+
+                // Get user input
+                cout << "Enter food name: ";
+                cin.ignore();
                 getline(cin, newFName);
-                cout << "Enter New Food Cost: ";
-                cin >> newFCost;
-                cout << "Enter New Food Category: ";
-                cin >> newFCat;
-                int newFId = foodList.ReturnCatNum(newFCat);
-                foodList.Add(newFName, newFCost, newFId);
+
+                
+                cout << "Enter food cost: ";
+                string costInput;
+                getline(cin, costInput);
+
+                cout << "Enter food category: ";
+                getline(cin, newFCat);
+
+                try {
+                    newFCost = stod(costInput);
+                    if (newFName.empty() || newFCost <= 0 || newFCat.empty()) {
+                        throw invalid_argument("Invalid input. All fields must be filled.");
+                    }
+
+                    if (foodList.Exist(newFName)) {
+                        throw runtime_error("Food item already exists in the list.");
+                    }
+
+                    int newFId = foodList.ReturnCatNum(newFCat);
+                    foodList.Add(newFName, newFCost, newFId);
+
+                    cout << "New food item added successfully!" << endl;
+                }
+                catch (const exception& e) {
+                    cerr << "An error occurred: " << e.what() << endl;
+                }
             }
 
-            else if (option == 3) { //See All Food Item
+            else if (option == "3") { //See All Food Item
                 foodList.PrintAll();
             }
 
-            else if (option == 4) { // Update Order Status
+            else if (option == "4") { // Update Order Status
                 cout << "Change status of first order to completed [Y/N]:";
                 string confirm;
                 cin >> confirm;
@@ -216,10 +242,11 @@ int main()
                 }
             }
 
-            else if (option == 0) { // Log out
+            else if (option == "0") { // Log out
                 islogin = false;
                 isadmin = true;
             }
+
             else {
                 cout << "Invalid Input" << endl;
             }

@@ -15,12 +15,21 @@ adminList::~adminList() {
 	adminSize = 0;
 }
 
-int adminList::hash(int len) {
-	return len % ADMIN_SIZE;
+
+int adminList::hash(string username) {
+	const int prime = 31;  // A prime number for better distribution
+	int len = username.length();
+
+	int hashValue = 0;
+	for (char c : username) {
+		hashValue = hashValue * prime + c;
+	}
+
+	return hashValue % ADMIN_SIZE;
 }
 
 bool adminList::add(Admin admin) {
-	int index = hash(admin.getUsername().length());
+	int index = hash(admin.getUsername());
 
 	AdminNode* newAdmin = new AdminNode;
 	newAdmin->admin = admin;
@@ -52,7 +61,7 @@ bool adminList::add(Admin admin) {
 }
 
 void adminList::remove(Admin admin) {
-	int index = hash(admin.getUsername().length());
+	int index = hash(admin.getUsername());
 	AdminNode* prev = AdminList[index];
 	if (prev == nullptr) {
 		cout << "Item not found" << endl;
@@ -81,7 +90,7 @@ void adminList::remove(Admin admin) {
 }
 
 Admin adminList::get(Username username) {
-	int index = hash(username.length());
+	int index = hash(username);
 
 	AdminNode* current = AdminList[index];
 
@@ -118,7 +127,7 @@ void adminList::print() {
 	}
 }
 bool adminList::Login(Username username, Password pwrod) {
-	int index = hash(username.length());
+	int index = hash(username);
 	
 	AdminNode* current = AdminList[index];
 	while (current != nullptr) {

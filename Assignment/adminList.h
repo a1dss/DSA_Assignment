@@ -23,7 +23,7 @@ public:
 
 	~adminList();
 
-	int hash(int len);
+	int hash(string username);
 
 	bool add(Admin admin);
 

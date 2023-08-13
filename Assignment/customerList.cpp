@@ -15,12 +15,20 @@ customerList:: ~customerList() {
 	custSize = 0;
 }
 
-int customerList::hash(int len) {
-	return len % CUST_SIZE;
+int customerList::hash(string username) {
+	const int prime = 31;  // A prime number for better distribution
+	int len = username.length();
+
+	int hashValue = 0;
+	for (char c : username) {
+		hashValue = hashValue * prime + c;
+	}
+
+	return hashValue % CUST_SIZE;
 }
 
 bool customerList::add(Customer cust) {
-	int index = hash(cust.getUsername().length());
+	int index = hash(cust.getUsername());
 
 	CustNode* newCust = new CustNode;
 	newCust->cust = cust;
@@ -51,7 +59,7 @@ bool customerList::add(Customer cust) {
 }
 
 void customerList::remove(Customer cust) {
-	int index = hash(cust.getUsername().length());
+	int index = hash(cust.getUsername());
 	CustNode* prev = CustList[index];
 	if (prev == nullptr) {
 		cout << "Item not found" << endl;
@@ -80,7 +88,7 @@ void customerList::remove(Customer cust) {
 }
 
 Customer customerList::get(Username username) {
-	int index = hash(username.length());
+	int index = hash(username);
 	CustNode* current = CustList[index];
 
 	while (current != nullptr && current->cust.getUsername() != username) {
@@ -119,7 +127,7 @@ void customerList::print() {
 }
 
 bool customerList::Login(Username username, Password pwrod) {
-	int index = hash(username.length());
+	int index = hash(username);
 	
 	CustNode* current = CustList[index];
 	while (current != nullptr) {
@@ -134,7 +142,7 @@ bool customerList::Login(Username username, Password pwrod) {
 
 void customerList::update(Customer customer)
 {
-	int index = hash(customer.getUsername().length());
+	int index = hash(customer.getUsername());
 
 	CustNode* current = CustList[index];
 	while (current != nullptr) {

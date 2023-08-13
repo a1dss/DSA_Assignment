@@ -22,7 +22,7 @@ public:
 
 	~customerList();
 	
-	int hash(int len);
+	int hash(string username);
 	
 	bool add(Customer cust);
 	

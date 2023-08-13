@@ -224,11 +224,18 @@ int main()
             }
 
             else if (option == "3") {
-                int index;
+                string stringIndex;
+                int index = 0;
                 cout << "Current Menu" << endl;
                 foodList.PrintAll();
                 cout << "Enter Index to Remove";
-                cin >> index;
+                cin >> stringIndex;
+                try {
+                     index = stoi(stringIndex);
+                }
+                catch (const exception& e) {
+                    
+                }
                 foodList.Remove(index - 1);
                 cout << "New Menu" << endl;
                 foodList.PrintAll();

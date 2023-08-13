@@ -34,7 +34,8 @@ int adminList::hash(string username) {
 	return hashValue % ADMIN_SIZE;
 }
 
-// Add 
+// Add admin to adminList
+// takes in Admin returns bool
 bool adminList::add(Admin admin) {
 	int index = hash(admin.getUsername());
 
@@ -67,6 +68,9 @@ bool adminList::add(Admin admin) {
 	adminSize++;
 }
 
+
+// Remove admin from admin list
+// Takes in admin returns void
 void adminList::remove(Admin admin) {
 	int index = hash(admin.getUsername());
 	AdminNode* prev = AdminList[index];
@@ -96,6 +100,8 @@ void adminList::remove(Admin admin) {
 	adminSize--;
 }
 
+// Retrieves admin from adminList
+// Takes in Username return admin
 Admin adminList::get(Username username) {
 	int index = hash(username);
 
@@ -112,6 +118,8 @@ Admin adminList::get(Username username) {
 	return current->admin;
 }
 
+// Checks to see if adminList is empty
+// takes in nothing, returns bool
 bool adminList::isEmpty() {
 	if (adminSize == 0) {
 		return true;
@@ -119,9 +127,14 @@ bool adminList::isEmpty() {
 	return false;
 }
 
+// get length of adminList
+// takes in nothing returns int
 int adminList::getLength() {
 	return adminSize;
 }
+
+//print admin info
+// takes in nothing returns nothing
 void adminList::print() {
 	for (int i = 0; i < ADMIN_SIZE; i++) {
 		AdminNode* current = AdminList[i];
@@ -133,6 +146,9 @@ void adminList::print() {
 		}
 	}
 }
+
+// Admin Log in
+// takes in Username and Password, returns bool
 bool adminList::Login(Username username, Password pwrod) {
 	int index = hash(username);
 	

@@ -3,6 +3,7 @@
 
 #include "Customer.h"
 
+
 Customer::Customer() {}
 
 Customer::Customer(Username u, Password p,Points ps, Rank r) : User(u, p)
@@ -19,12 +20,16 @@ Rank Customer::getRank() {
     return rank;
 }
 
+//Display Customer Info
+// takes in nothing returns nothing
 void Customer::DisplayInfo() {
 	cout << "Username: " << getUsername() << endl;
 	cout << "Points: " << points << endl;
 	cout << "Rank: " << rank << endl;
 }
 
+// Updates the Customer rank
+// takes in nothing returns nothing
 void Customer::UpdateRank()
 {
     if (points >= 300 ) {
@@ -38,6 +43,9 @@ void Customer::UpdateRank()
     }
 
 }
+
+// Adds points to the Customer 
+// takes in double returns nothing
 void Customer::AddPoints(double amountSpent)
 {
     amountSpent *= 100;  // Convert to cents
@@ -46,6 +54,8 @@ void Customer::AddPoints(double amountSpent)
     cout << "New Rank: " << rank << endl;
 }
 
+// allows customer to use points
+// takes in double returns double
 double Customer::UsePoints(double cost)
 {
     double discountAmt;

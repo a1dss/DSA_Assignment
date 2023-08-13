@@ -3,6 +3,9 @@
 
 #include "customerList.h"
 
+
+// functions similar to those of adminList
+
 customerList::customerList() {
 	for (int i = 0; i < CUST_SIZE;i++) {
 		CustList[i] = nullptr;

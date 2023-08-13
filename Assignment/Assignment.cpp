@@ -36,8 +36,9 @@ void AdminPanel()
     cout << "Welcome\n"
         << "[1] See Order Details\n"
         << "[2] Add food item\n"
-        << "[3] See all food item\n"
-        << "[4] Update Order status\n"
+        << "[3] Remove food item\n"
+        << "[4] See all food item\n"
+        << "[5] Update Order status\n"
         << "[0] Logout\n"
         << "Please Choose an Option: ";
    
@@ -180,7 +181,8 @@ int main()
             }
 
             else if (option == "2") { //Add Food Item
-
+                cout << "Current Menu" << endl;
+                foodList.PrintAll();
                 string newFName;
              
                 double newFCost=0;
@@ -217,13 +219,25 @@ int main()
                 catch (const exception& e) {
                     cerr << "An error occurred: " << e.what() << endl;
                 }
-            }
-
-            else if (option == "3") { //See All Food Item
+                cout << "New Menu" << endl;
                 foodList.PrintAll();
             }
 
-            else if (option == "4") { // Update Order Status
+            else if (option == "3") {
+                int index;
+                cout << "Current Menu" << endl;
+                foodList.PrintAll();
+                cout << "Enter Index to Remove";
+                cin >> index;
+                foodList.Remove(index - 1);
+                cout << "New Menu" << endl;
+                foodList.PrintAll();
+            }
+            else if (option == "4") { //See All Food Item
+                foodList.PrintAll();
+            }
+
+            else if (option == "5") { // Update Order Status
                 cout << "Change status of first order to completed [Y/N]:";
                 string confirm;
                 cin >> confirm;

@@ -44,6 +44,7 @@ public:
 	//Add food to list
 	void Add(string name, double cost, int catagory);
 
+	void Remove(int id);
 
 	//List all food option and prices
 	void PrintAll();

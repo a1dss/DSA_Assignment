@@ -26,9 +26,9 @@ public:
 	~adminList();
 
 
-	// Hash function fro admin
+	// Hash function for admin
 	// Return index for dictionary access
-	int hash(int len);
+	int hash(string username);
 
 	// Add Admin to Dictionary
 	// Prerequisite: Admin must not exist in the dictionary

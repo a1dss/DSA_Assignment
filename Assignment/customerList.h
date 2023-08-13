@@ -28,7 +28,7 @@ public:
 	~customerList();
 	
 	//Hash fucntion for customer
-	int hash(int len);
+	int hash(string username);
 	
 	//Add customer to Dictionary
 	// Prerequsite: Name must not exist in the dictionary
